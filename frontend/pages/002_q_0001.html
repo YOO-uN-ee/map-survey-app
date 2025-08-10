@@ -87,19 +87,19 @@
 
 
     <div class="g-card">
-      <form action="http://127.0.0.1:8000/api/submit/" method="post" id="form-002-q_0001">
+      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-002-q_0001">
         <input type="hidden" name="user" value="002">
         <input type="hidden" name="question_ref" value="q_0001">
         <input type="hidden" name="question_text" value="What is the relative position of A to B?">
         <input type="hidden" name="map_count" value="Multi">
         <input type="hidden" name="spatial_relationship" value="Distance">
-        <input type="hidden" name="next_url" value="http://127.0.0.1:8001/002_q_0002.html">
+        <input type="hidden" name="next_url" value="https://map-survey-app.onrender.com/thankyou.html">
         <div class="g-section">
           <div class="g-q-title">What is the relative position of A to B?</div>
           <div class="g-img-grid">
 
             <img src="https://media.githubusercontent.com/media/YOO-uN-ee/map_benchmark_images/refs/heads/main/Borders/Multi/m_border_1/image90_3.jpeg" alt="Map image">
-            <img src="https://raw.githubusercontent.com/open-mmlab/mmdeploy/main/tests/data/tiger.jpeg" alt="Map image">
+            <img src="https://media.githubusercontent.com/media/YOO-uN-ee/map_benchmark_images/refs/heads/main/https://raw.githubusercontent.com/open-mmlab/mmdeploy/main/tests/data/tiger.jpeg" alt="Map image">
 
           </div>
           <label class="g-q-title">Answer <span class="g-muted-note">(optional)</span></label>
@@ -123,7 +123,7 @@
 
 
           <div class="g-actions">
-            <button class="g-btn" type="submit">Submit & Next</button>
+            <button class="g-btn" type="submit">Submit</button>
           </div>
         </div>
       </form>
@@ -134,7 +134,7 @@
   (function() {
     const USER = "002";
     const QREF = "q_0001";
-    const NEXT = "http://127.0.0.1:8001/002_q_0002.html";
+    const NEXT = "https://map-survey-app.onrender.com/thankyou.html";
     const answeredKey = `answered:${USER}:${QREF}`;
     const progressKey = `progress:${USER}`;
 
