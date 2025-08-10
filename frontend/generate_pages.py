@@ -196,9 +196,9 @@ for i, q in enumerate(questions):
             )
 
         if idx + 1 < len(pages_for_user):
-            next_url = f"{PAGES_BASE_URL}/{pages_for_user[idx+1]}"
+            next_url = f"https://map-survey-app.onrender.com/{pages_for_user[idx+1]}"
         else:
-            next_url = f"{PAGES_BASE_URL}/thankyou.html"
+            next_url = f"https://map-survey-app.onrender.com/thankyou.html"
 
         # Build HTML
         html_parts = [f"""<!DOCTYPE html>
@@ -230,7 +230,7 @@ for i, q in enumerate(questions):
 
         form_block = [f'''
     <div class="g-card">
-      <form action="{BACKEND_BASE_URL}/api/submit/" method="post" id="form-{user_id}-{question_ref}">
+      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-{user_id}-{question_ref}">
         <input type="hidden" name="user" value="{escape(user_id, quote=True)}">
         <input type="hidden" name="question_ref" value="{escape(question_ref, quote=True)}">
         <input type="hidden" name="question_text" value="{qtext_attr}">
