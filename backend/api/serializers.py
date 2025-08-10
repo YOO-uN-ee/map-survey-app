@@ -2,10 +2,12 @@ from rest_framework import serializers
 from .models import SurveyResponse, User
 
 class SurveyResponseSerializer(serializers.ModelSerializer):
-    user = serializers.SlugRelatedField(
-        slug_field='user_id',
-        queryset=User.objects.all()
-    )
+    # user = serializers.SlugRelatedField(
+    #     slug_field='user_id',
+    #     queryset=User.objects.all()
+    # )
+
+    user = serializers.CharField()
 
     validity = serializers.ChoiceField(
         choices=[
