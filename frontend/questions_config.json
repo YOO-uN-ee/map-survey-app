@@ -1,0 +1,17 @@
+  [
+    {
+      "question_text": "What is the relative position of A to B?",
+      "image_urls": ["Borders/Multi/m_border_1/image90_3.jpeg",
+      "https://raw.githubusercontent.com/open-mmlab/mmdeploy/main/tests/data/tiger.jpeg"],
+      "map_count": "Multi",
+      "spatial_relationship": "Distance",
+      "expected_answer": "hello"
+    },
+    {
+      "question_text": "Which area intersects the park?",
+      "image_urls": ["https://raw.githubusercontent.com/open-mmlab/mmdeploy/main/tests/data/tiger.jpeg"],
+      "map_count": "Single",
+      "spatial_relationship": "Intersect",
+      "expected_answer": "bye"
+    }
+  ]

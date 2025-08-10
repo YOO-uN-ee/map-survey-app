@@ -1,0 +1,397 @@
+#!/usr/bin/env python3
+import os
+import csv
+import json
+from html import escape
+
+# =========================
+# Paths & Config
+# =========================
+QUESTION_FILE = "questions_config.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
+USER_FILE = "users.csv"                   # CSV with headers: user_id,user_name
+OUTPUT_DIR = "pages"                      # Generated HTML output
+ASSIGNMENTS_FILE = "assignments.json"     # Optional: mapping question_ref -> [user_id, user_id, user_id]
+
+# Where the static HTML pages are served (use a local HTTP server)
+#   cd pages && python -m http.server 8001
+PAGES_BASE_URL = "http://127.0.0.1:8001"
+
+# Your Django REST backend (submit endpoint at /api/submit/)
+BACKEND_BASE_URL = "http://127.0.0.1:8000"
+
+# Validity options (two categories)
+VALIDATION_OPTIONS = [
+    "Can be answered",
+    "Map doesn't contain information to answer the question",
+]
+
+# =========================
+# Load Data
+# =========================
+with open(QUESTION_FILE, "r", encoding="utf-8") as f:
+    questions = json.load(f)
+
+with open(USER_FILE, "r", newline="", encoding="utf-8") as f:
+    users = list(csv.DictReader(f))
+
+if not users:
+    raise SystemExit("users.csv is empty — need at least one user.")
+
+# =========================
+# Assign each question to 3 users (round-robin)
+# =========================
+# We also generate an internal question_ref for each question (q_0001, q_0002, ...)
+question_refs = []
+for idx, _ in enumerate(questions, start=1):
+    question_refs.append(f"q_{idx:04d}")
+
+assignments = {ref: [] for ref in question_refs}
+user_index = 0
+for ref in question_refs:
+    for _ in range(3):
+        user = users[user_index % len(users)]
+        assignments[ref].append(user["user_id"])
+        user_index += 1
+
+# Build per-user ordered list of page filenames (MUST match write-out naming)
+user_pages = {u["user_id"]: [] for u in users}
+
+for i, _ in enumerate(questions):
+    ref = question_refs[i]                 # e.g., q_0001
+    for uid in assignments[ref]:
+        user_pages[uid].append(f"{uid}_{ref}.html")   # <-- exact same pattern as this_filename
+
+print("Assignment summary:")
+for uid, files in user_pages.items():
+    print(f"  {uid}: {len(files)} page(s) -> {files[:5]}{' ...' if len(files) > 5 else ''}")
+
+# =========================
+# Styles (Google-Forms-like minimal, no purple header) + lightbox
+# =========================
+GOOGLE_FORMS_CSS = """
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g-purple: #673ab7;
+    --g-purple-dark: #5e35b1;
+    --g-bg: #f6f6f6;
+    --g-text: #202124;
+    --g-muted: #5f6368;
+    --g-card: #ffffff;
+    --g-border: #dadce0;
+  }
+  html, body { margin: 0; background: var(--g-bg); color: var(--g-text); font-family: Roboto, Arial, sans-serif; }
+  .g-container { max-width: 880px; margin: 24px auto 64px auto; padding: 0 16px; }
+  .g-card { background: var(--g-card); border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.24); border: 1px solid var(--g-border); margin-bottom: 16px; }
+  .g-card-header { padding: 24px 24px 12px 24px; border-bottom: 1px solid var(--g-border); }
+  .g-title { font-size: 28px; font-weight: 500; margin: 0 0 4px 0; }
+  .g-subtitle { color: var(--g-muted); font-size: 14px; margin: 0; }
+  .g-section { padding: 20px 24px 24px 24px; }
+  .g-q-title { font-size: 18px; font-weight: 500; margin: 0 0 12px 0; }
+  .g-required::after { content: " *"; color: #d93025; font-weight: 700; }
+  .g-help { color: var(--g-muted); font-size: 12px; margin-top: 6px; }
+  .g-img-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0 8px 0; }
+  .g-img-grid img { width: 100%; height: auto; border: 1px solid var(--g-border); border-radius: 6px; background: #fff; cursor: zoom-in; }
+  textarea { width: 100%; min-height: 96px; resize: vertical; padding: 10px 12px; border: 1px solid var(--g-border); border-radius: 6px; font-family: Roboto, Arial, sans-serif; font-size: 14px; box-sizing: border-box; }
+  .g-radio-group { margin-top: 6px; }
+  .g-radio { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 14px; }
+  .g-actions { display: flex; justify-content: flex-start; gap: 12px; padding: 16px 24px 24px 24px; }
+  .g-btn { background: var(--g-purple); color: #fff; border: none; border-radius: 24px; padding: 10px 20px; font-weight: 500; cursor: pointer; }
+  .g-btn[disabled] { opacity: .6; cursor: not-allowed; }
+  .g-btn:hover { background: var(--g-purple-dark); }
+  details.g-instructions summary { font-weight: 500; cursor: pointer; list-style: none; }
+  details.g-instructions summary::-webkit-details-marker { display:none; }
+  details.g-instructions summary:after { content: "▾"; float: right; color: var(--g-muted); }
+  details.g-instructions[open] summary:after { content: "▴"; }
+  .g-muted-note { color: var(--g-muted); font-size: 12px; margin-left: 4px; }
+  /* Image lightbox */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: none; align-items: center; justify-content: center; z-index: 9999; }
+  .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.5); }
+  .lightbox.visible { display: flex; }
+  .lightbox:after { content: "×"; position: fixed; top: 16px; right: 24px; font-size: 28px; color: #fff; cursor: pointer; }
+</style>
+"""
+
+# =========================
+# Instructions Block
+# =========================
+INSTRUCTIONS = """
+<details class="g-instructions" open>
+  <summary>Instructions</summary>
+  <div style="margin-top:12px;">
+    <p><strong>General</strong></p>
+    <ul>
+      <li>If question can be answered, write answer in short answer box</li>
+      <li>If answer is a text from the map, copy it as it appears</li>
+    </ul>
+    <p><strong>Numerical Answers</strong></p>
+    <ul>
+      <li>Include units as indicated on the map <em>(Don’t convert 1200m to 1.2km)</em></li>
+      <li>If question asks for an area, use &#123;unit&#125;&#178;</li>
+      <li>Use numerical values <em>(e.g., 4 instead of four)</em></li>
+    </ul>
+    <p><strong>Directional Answers</strong></p>
+    <ul>
+      <li>Use 8 cardinal directions only: North, North East, East, South East, South, South West, West, North West</li>
+      <li>Write 'North' or 'South' before 'East' or 'West'</li>
+    </ul>
+    <p><strong>Multi-Part Answers</strong></p>
+    <ul>
+      <li>Separate with semicolon (;) <em>(e.g., Zone A; Zone B)</em></li>
+    </ul>
+  </div>
+</details>
+"""
+
+# =========================
+# Generate Thank You page (static, not Django)
+# =========================
+def write_thankyou_page():
+    path = os.path.join(OUTPUT_DIR, "thankyou.html")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("""<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Thank you</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body{font-family:Roboto,Arial,sans-serif;background:#f6f6f6;color:#202124;margin:0}
+  .wrap{max-width:720px;margin:80px auto;padding:32px;background:#fff;border:1px solid #dadce0;border-radius:8px;
+        box-shadow:0 1px 2px rgba(0,0,0,.12),0 1px 3px rgba(0,0,0,.24)}
+  h1{margin:0 0 12px 0}
+  p{color:#5f6368}
+  a{color:#5e35b1;text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Thank you for participating!</h1>
+    <p>Your responses have been recorded.</p>
+  </div>
+</body></html>""")
+
+
+# =========================
+# Generate Pages
+# =========================
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+write_thankyou_page()
+
+for i, q in enumerate(questions):
+    question_ref = question_refs[i]
+    qtext = q["question_text"]
+    image_urls = q.get("image_urls", [])
+    map_count = q.get("map_count", "Single")  # 'Single' or 'Multi'
+    spatial = q.get("spatial_relationship", "Distance")  # fallback default
+
+    # Generate a page per assigned user
+    for user_id in assignments[question_ref]:
+        pages_for_user = user_pages[user_id]
+        this_filename = f"{user_id}_{question_ref}.html"
+
+        try:
+            idx = pages_for_user.index(this_filename)
+        except ValueError:
+            raise RuntimeError(
+                f"Filename mismatch: {this_filename} not found in pages_for_user for user {user_id}. "
+                f"List has: {pages_for_user}"
+            )
+
+        if idx + 1 < len(pages_for_user):
+            next_url = f"{PAGES_BASE_URL}/{pages_for_user[idx+1]}"
+        else:
+            next_url = f"{PAGES_BASE_URL}/thankyou.html"
+
+        # Build HTML
+        html_parts = [f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{question_ref}</title>
+  {GOOGLE_FORMS_CSS}
+</head>
+<body>
+  <div class="g-container">
+    <div class="g-card">
+      <div class="g-card-header">
+        <h1 class="g-title">Map Question</h1>
+        <p class="g-subtitle">Map Survey <span class="g-muted-note">(Fields marked * are required)</span></p>
+      </div>
+      <div class="g-section">
+        {INSTRUCTIONS}
+      </div>
+    </div>
+"""]
+
+        # Form card
+        # Escape hidden values for safety (quotes, etc.)
+        qtext_attr = escape(qtext, quote=True)
+        map_count_attr = escape(map_count, quote=True)
+        spatial_attr = escape(spatial, quote=True)
+        next_url_attr = escape(next_url, quote=True)
+
+        form_block = [f'''
+    <div class="g-card">
+      <form action="{BACKEND_BASE_URL}/api/submit/" method="post" id="form-{user_id}-{question_ref}">
+        <input type="hidden" name="user" value="{escape(user_id, quote=True)}">
+        <input type="hidden" name="question_ref" value="{escape(question_ref, quote=True)}">
+        <input type="hidden" name="question_text" value="{qtext_attr}">
+        <input type="hidden" name="map_count" value="{map_count_attr}">
+        <input type="hidden" name="spatial_relationship" value="{spatial_attr}">
+        <input type="hidden" name="next_url" value="{next_url_attr}">
+        <div class="g-section">
+          <div class="g-q-title">{escape(qtext)}</div>
+          <div class="g-img-grid">
+''']
+
+        for url in image_urls:
+            full_url = f"https://media.githubusercontent.com/media/YOO-uN-ee/map_benchmark_images/refs/heads/main/{url}"
+            form_block.append(f'            <img src="{escape(full_url, quote=True)}" alt="Map image">')
+
+        form_block.append('''
+          </div>
+          <label class="g-q-title">Answer <span class="g-muted-note">(optional)</span></label>
+          <textarea name="answer" placeholder="Type your short answer here..."></textarea>
+
+          <div style="margin-top:16px;">
+            <label class="g-q-title g-required">Validation</label>
+            <div class="g-radio-group">
+''')
+
+        # Two-option validity radios (required)
+        for option in VALIDATION_OPTIONS:
+            opt_attr = escape(option, quote=True)
+            form_block.append(
+                f'              <label class="g-radio"><input type="radio" name="validity" value="{opt_attr}" required> {escape(option)}</label>'
+            )
+
+        form_block.append('            </div>')
+
+        # Necessary only for multi-map
+        if map_count == "Multi":
+            form_block.append('''
+            <div style="margin-top:16px;">
+              <label class="g-q-title">Are all images necessary to answer precisely without guessing?</label>
+              <div class="g-radio-group">
+                <label class="g-radio"><input type="radio" name="necessary" value="yes"> Yes</label>
+                <label class="g-radio"><input type="radio" name="necessary" value="no"> No</label>
+              </div>
+            </div>
+''')
+
+        # Submit button
+        button_label = "Submit & Next" if next_url.endswith("thankyou.html") is False else "Submit"
+        form_block.append(f'''
+          <div class="g-actions">
+            <button class="g-btn" type="submit">{button_label}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+''')
+
+        html_parts.extend(form_block)
+
+        # Inline script:
+        # - Lightbox for images
+        # - Prevent double submit in UI
+        # - Track answered per (user, question_ref)
+        # - Track progress (next URL or DONE)
+        # - On revisit, redirect to saved progress (if different page)
+        html_parts.append(f"""
+    <script>
+  (function() {{
+    const USER = "{escape(user_id, quote=True)}";
+    const QREF = "{escape(question_ref, quote=True)}";
+    const NEXT = "{next_url_attr}";
+    const answeredKey = `answered:${{USER}}:${{QREF}}`;
+    const progressKey = `progress:${{USER}}`;
+
+    function disableForm(){{
+      const form = document.getElementById('form-{escape(user_id, quote=True)}-{escape(question_ref, quote=True)}');
+      if (!form) return;
+      form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+      const btn = form.querySelector('button.g-btn');
+      if (btn) btn.textContent = 'Submitted';
+    }}
+
+    // ------- Image Lightbox -------
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML = '<img id="lb-img" alt="Zoomed image">';
+    document.body.appendChild(lb);
+    lb.addEventListener('click', () => lb.classList.remove('visible'));
+    document.querySelectorAll('.g-img-grid img').forEach(img => {{
+      img.addEventListener('click', () => {{
+        document.getElementById('lb-img').src = img.src;
+        lb.classList.add('visible');
+      }});
+    }});
+
+    // If already answered, disable and redirect if possible
+    (function stripOkParam(){{
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('ok')) {{
+        url.searchParams.delete('ok');
+        window.history.replaceState({{}}, '', url.toString());
+      }}
+    }})();
+
+    // If the API redirected here with ok=1, mark as answered and advance progress
+    if (new URLSearchParams(window.location.search).get('ok') === '1') {{
+      localStorage.setItem(answeredKey, '1');
+      localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
+    }}
+
+    // If saved progress points to a different page, navigate there
+    const savedProgress = localStorage.getItem(progressKey);
+    if (savedProgress && savedProgress !== '' && savedProgress !== 'DONE') {{
+      const savedPath = savedProgress.split('#')[0];
+      const thisPath = window.location.href.split('#')[0];
+      if (savedPath !== thisPath) {{ window.location.replace(savedProgress); return; }}
+    }}
+
+    const form = document.getElementById('form-{escape(user_id, quote=True)}-{escape(question_ref, quote=True)}');
+    if (!form) return;
+
+    // Prevent double-submit on the client,
+    // but DO NOT disable inputs before the browser serializes the form.
+    let submitted = false;
+    form.addEventListener('submit', function(e) {{
+      if (submitted) {{ e.preventDefault(); return; }}
+      submitted = true;
+
+      // ---- NEW: record progress *now* (for this page), before navigation ----
+      try {{
+        localStorage.setItem(answeredKey, '1');
+        localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
+      }} catch (err) {{ /* ignore quota/security errors */ }}
+
+      // Disable only the submit button immediately (buttons don't affect payload)
+      const btn = form.querySelector('button.g-btn');
+      if (btn) {{
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+      }}
+
+      // Important: allow the browser to serialize & send the form first.
+      // Then (a moment later) lock the rest purely for UX.
+      setTimeout(() => {{
+        form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+      }}, 100);
+    }}, {{ once: true }});
+  }})();
+</script>
+  </div>
+</body>
+</html>
+""")
+
+        # Write page
+        output_path = os.path.join(OUTPUT_DIR, this_filename)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(html_parts))
+
+# Save assignments for reference
+with open(ASSIGNMENTS_FILE, "w", encoding="utf-8") as f:
+    json.dump(assignments, f, indent=2)
+
+print(f"Generated {sum(len(v) for v in assignments.values())} pages in '{OUTPUT_DIR}/' and a thankyou.html")
