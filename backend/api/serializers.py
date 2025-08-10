@@ -40,3 +40,9 @@ class SurveyResponseSerializer(serializers.ModelSerializer):
             "timestamp",
         ]
         read_only_fields = ["timestamp"]
+
+    def create(self, validated_data):
+        user_id = validated_data.pop("user").strip()
+        # create or get the User row
+        user_obj, _ = User.objects.get_or_create(user_id=user_id, defaults={"name": user_id})
+        return SurveyResponse.objects.create(user=user_obj, **validated_data)
