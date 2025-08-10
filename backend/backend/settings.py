@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,16 +56,21 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
+    "https://map-survey-app.onrender.com",  # your frontend
+]
+CSRF_TRUSTED_ORIGINS = [
     "https://map-survey-app.onrender.com",
 ]
+ALLOWED_HOSTS = [
+    "mysite-mrzq.onrender.com",
+    "localhost", "127.0.0.1",
+]
 
-CSRF_TRUSTED_ORIGINS = ["https://map-survey-app.onrender.com"]
-
-ALLOWED_HOSTS = ["https://mysite-mrzq.onrender.com", "localhost", "127.0.0.1"]
+# Optionally allow hosts from env var (Render will set one)
+ALLOWED_HOSTS.extend(os.environ.get("ALLOWED_HOSTS", "").split(","))
 
 # Optional security headers (recommended behind HTTPS)
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
