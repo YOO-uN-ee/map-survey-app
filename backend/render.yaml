@@ -7,6 +7,7 @@ databases:
 services:
   - type: web
     plan: free
+    region: oregon
     name: mysite
     runtime: python
     buildCommand: './build.sh'
@@ -20,3 +21,5 @@ services:
         generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
+      - key: FRONTEND_ORIGIN
+        value: https://map-survey-app.onrender.com
