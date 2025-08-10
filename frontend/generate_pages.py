@@ -14,10 +14,10 @@ ASSIGNMENTS_FILE = "assignments.json"     # Optional: mapping question_ref -> [u
 
 # Where the static HTML pages are served (use a local HTTP server)
 #   cd pages && python -m http.server 8001
-PAGES_BASE_URL = "http://127.0.0.1:8001"
+PAGES_BASE_URL = "https://map-survey-app.onrender.com"
 
 # Your Django REST backend (submit endpoint at /api/submit/)
-BACKEND_BASE_URL = "http://127.0.0.1:8000"
+BACKEND_BASE_URL = "https://mysite-mrzq.onrender.com"
 
 # Validity options (two categories)
 VALIDATION_OPTIONS = [
