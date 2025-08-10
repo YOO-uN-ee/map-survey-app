@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'backend.api',   # <- use AppConfig path
+    'api',   # <- use AppConfig path
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
-ROOT_URLCONF = 'backend.backend.urls'
+ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
