@@ -48,7 +48,7 @@ for idx, _ in enumerate(questions, start=1):
 assignments = {ref: [] for ref in question_refs}
 user_index = 0
 for ref in question_refs:
-    for _ in range(3):
+    for _ in range(2):
         user = users[user_index % len(users)]
         assignments[ref].append(user["user_id"])
         user_index += 1
@@ -64,6 +64,7 @@ for i, _ in enumerate(questions):
 print("Assignment summary:")
 for uid, files in user_pages.items():
     print(f"  {uid}: {len(files)} page(s) -> {files[:5]}{' ...' if len(files) > 5 else ''}")
+
 
 # =========================
 # Styles (Google-Forms-like minimal, no purple header) + lightbox
@@ -142,6 +143,100 @@ INSTRUCTIONS = """
   </div>
 </details>
 """
+
+def write_user_start_page(uid: str, ordered_files: list[str]):
+    """
+    Create <uid>_start.html with the instructions and a 'Next' button.
+    'Next' → last answered question for this user; if none answered → first question;
+    if all answered → thankyou.html.
+    """
+    # Build structured info for JS (qref + url) so we can check localStorage keys.
+    # Example filename pattern: "{user_id}_{qref}.html"
+    items = []
+    for fname in ordered_files:
+        # extract qref after the first underscore and before ".html"
+        try:
+            qref = fname.split("_", 1)[1].removesuffix(".html")
+        except Exception:
+            qref = fname  # fallback; shouldn't happen with our generator
+        items.append({"qref": qref, "url": f"{fname}"})
+
+    start_html = f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{uid} — Start</title>
+  {GOOGLE_FORMS_CSS}
+</head>
+<body>
+  <div class="g-container">
+    <div class="g-card">
+      <div class="g-card-header">
+        <h1 class="g-title">Thank you for participating!</h1>
+        <p class="g-subtitle">Please read the instructions below, then click Next to begin or resume.</p>
+      </div>
+      <div class="g-section">
+        <p>You can find more details about the benchmark dataset in this <a href="#" target="_blank" rel="noopener">Google Slides</a>.</p>
+        <p>This form contains 30 questions. For each one, please verify whether it can be answered (Q# Validation) using the provided map(s). If an image appears too small, click on the name of the image (Image#) to open a full-sized version in Google Drive. For questions with multiple images, please mark whether all images were required to correctly answer the question (Q# M). You may use tools like a ruler or calculator, but do not use online search.</p>
+        {INSTRUCTIONS}
+      </div>
+      <div class="g-actions">
+        <button id="go-next" class="g-btn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {{
+      const USER = "{escape(uid, quote=True)}";
+      // Ordered list of this user's pages (qref + url)
+      const PAGES = {json.dumps(items)};
+
+      function go() {{
+        if (!PAGES.length) {{
+          // No pages assigned; go to thank you.
+          window.location.href = "thankyou.html";
+          return;
+        }}
+
+        // Find the last answered question (highest index with answered=1)
+        let lastAnsweredIndex = -1;
+        for (let i = 0; i < PAGES.length; i++) {{
+          const key = `answered:${{USER}}:${{PAGES[i].qref}}`;
+          if (localStorage.getItem(key) === '1') lastAnsweredIndex = i;
+        }}
+
+        if (lastAnsweredIndex === -1) {{
+          // None answered → go to first question
+          window.location.href = PAGES[0].url;
+          return;
+        }}
+
+        // If some answered, go to the *last* answered question
+        // (If you prefer "next unanswered", use lastAnsweredIndex+1 when available)
+        const next = (lastAnsweredIndex + 1 < PAGES.length) ? lastAnsweredIndex + 1 : lastAnsweredIndex;
+        window.location.href = PAGES[next].url;
+      }}
+
+      document.getElementById('go-next').addEventListener('click', go);
+    }})();
+  </script>
+</body>
+</html>"""
+
+    out_path = os.path.join(OUTPUT_DIR, f"{uid}_start.html")
+    with open(out_path, "w", encoding="utf-8") as fh:
+        fh.write(start_html)
+
+
+# Generate a start page per user
+for uid, files in user_pages.items():
+    write_user_start_page(uid, files)
+
+print("\nOpen a user's Start page like:")
+some_uid = next(iter(user_pages.keys()))
+print(f"  {PAGES_BASE_URL}/{some_uid}_start.html")
+
 
 # =========================
 # Generate Thank You page (static, not Django)
