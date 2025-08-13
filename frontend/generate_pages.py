@@ -135,6 +135,7 @@ INSTRUCTIONS = """
     <ul>
       <li>Use 8 cardinal directions only: North, North East, East, South East, South, South West, West, North West</li>
       <li>Write 'North' or 'South' before 'East' or 'West'</li>
+      <li><strong>Notice that the north arrow compass do not always point upward</strong></li>
     </ul>
     <p><strong>Multi-Part Answers</strong></p>
     <ul>
@@ -177,7 +178,7 @@ def write_user_start_page(uid: str, ordered_files: list[str]):
       </div>
       <div class="g-section">
         <p>You can find more details about the benchmark dataset in this <a href="#" target="_blank" rel="noopener">Google Slides</a>.</p>
-        <p>This form contains 30 questions. For each one, please verify whether it can be answered (Q# Validation) using the provided map(s). If an image appears too small, click on the name of the image (Image#) to open a full-sized version in Google Drive. For questions with multiple images, please mark whether all images were required to correctly answer the question (Q# M). You may use tools like a ruler or calculator, but do not use online search.</p>
+        <p>For each question, please verify whether it can be answered (Q# Validation) using the provided map(s). If an image appears too small, click on the image . For questions with multiple images, please mark whether all images were required to correctly answer the question (Q# M). You may use tools like a ruler or calculator, but do not use online search.</p>
         {INSTRUCTIONS}
       </div>
       <div class="g-actions">
@@ -338,7 +339,7 @@ for i, q in enumerate(questions):
 ''']
 
         for url in image_urls:
-            full_url = f"https://media.githubusercontent.com/media/YOO-uN-ee/map_benchmark_images/refs/heads/main/{url}"
+            full_url = f"https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/{url}?token=A62UYO4BIVMP452H6PNIGS3ITTKRO"
             form_block.append(f'            <img src="{escape(full_url, quote=True)}" alt="Map image">')
 
         form_block.append('''
