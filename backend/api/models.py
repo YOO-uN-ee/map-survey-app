@@ -35,6 +35,7 @@ class SurveyResponse(models.Model):
     answer = models.TextField(blank=True)
     validity = models.CharField(max_length=128, choices=VALIDITY_CHOICES, null=True, blank=True)
     necessary = models.CharField(max_length=3, blank=True)  # 'yes' | 'no' (Multi only), optional
+    noinfo_reason = models.TextField(blank=True)
 
     timestamp = models.DateTimeField(auto_now_add=True)
 

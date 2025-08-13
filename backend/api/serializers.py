@@ -28,6 +28,9 @@ class SurveyResponseSerializer(serializers.ModelSerializer):
         required=True
     )
 
+    noinfo_reason = serializers.CharField(required=False, allow_blank=True, allow_null=True)
+
+
     class Meta:
         model = SurveyResponse
         fields = [
@@ -39,6 +42,7 @@ class SurveyResponseSerializer(serializers.ModelSerializer):
             "answer",
             "validity",
             "necessary",
+            "noinfo_reason",
             "timestamp",
         ]
         read_only_fields = ["timestamp"]

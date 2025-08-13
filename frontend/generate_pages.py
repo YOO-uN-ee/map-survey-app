@@ -361,6 +361,18 @@ for i, q in enumerate(questions):
 
         form_block.append('            </div>')
 
+        reason_wrap_id = f'noinfo-wrap-{user_id}-{question_ref}'
+        reason_text_id = f'noinfo-text-{user_id}-{question_ref}'
+        noinfo_label = "Please briefly explain what information was missing (required when selecting this option):"
+
+        form_block.append(f'''
+                    <div id="{reason_wrap_id}" style="display:none; margin-top:12px;">
+                      <label class="g-q-title">{escape(noinfo_label)}</label>
+                      <textarea id="{reason_text_id}" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature." ></textarea>
+                      <div class="g-help">This field is required only when selecting “Map doesn't contain information to answer the question”.</div>
+                    </div>
+        ''')
+
         # Necessary only for multi-map
         if map_count == "Multi":
             form_block.append('''
@@ -404,6 +416,23 @@ for i, q in enumerate(questions):
     function disableForm(){{
       const form = document.getElementById('form-{escape(user_id, quote=True)}-{escape(question_ref, quote=True)}');
       if (!form) return;
+      const NOINFO_VALUE = "Map doesn't contain information to answer the question";
+      const reasonWrap = document.getElementById("{escape(reason_wrap_id, quote=True)}");
+      const reasonText = document.getElementById("{escape(reason_text_id, quote=True)}");
+
+      function updateReasonVisibility() {{
+        const sel = form.querySelector('input[name="validity"]:checked');
+        const show = !!sel && sel.value === NOINFO_VALUE;
+        if (reasonWrap) reasonWrap.style.display = show ? 'block' : 'none';
+        if (reasonText) reasonText.required = !!show;
+      }}
+
+      // Initialize + bind change listeners to validity radios
+      Array.from(form.querySelectorAll('input[name="validity"]')).forEach(r => {{
+        r.addEventListener('change', updateReasonVisibility);
+      }});
+
+      updateReasonVisibility();
       form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
       const btn = form.querySelector('button.g-btn');
       if (btn) btn.textContent = 'Submitted';
@@ -453,6 +482,18 @@ for i, q in enumerate(questions):
     let submitted = false;
     form.addEventListener('submit', function(e) {{
       if (submitted) {{ e.preventDefault(); return; }}
+      const sel = form.querySelector('input[name="validity"]:checked');
+      const needsReason = !!sel && sel.value === NOINFO_VALUE;
+      if (needsReason) {{
+        const val = (reasonText && reasonText.value || "").trim();
+        if (!val) {{
+          e.preventDefault();
+          // Keep button enabled so user can try again
+          alert("Please provide a brief reason for why the map does not contain the required information.");
+          reasonText && reasonText.focus();
+          return;
+        }}
+      }}
       submitted = true;
 
       // ---- NEW: record progress *now* (for this page), before navigation ----
