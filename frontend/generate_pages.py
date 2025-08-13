@@ -38,7 +38,7 @@ if not users:
     raise SystemExit("users.csv is empty — need at least one user.")
 
 # =========================
-# Assign each question to 3 users (round-robin)
+# Assign each question to 2 users (round-robin)
 # =========================
 # We also generate an internal question_ref for each question (q_0001, q_0002, ...)
 question_refs = []
@@ -64,7 +64,6 @@ for i, _ in enumerate(questions):
 print("Assignment summary:")
 for uid, files in user_pages.items():
     print(f"  {uid}: {len(files)} page(s) -> {files[:5]}{' ...' if len(files) > 5 else ''}")
-
 
 # =========================
 # Styles (Google-Forms-like minimal, no purple header) + lightbox
@@ -178,7 +177,7 @@ def write_user_start_page(uid: str, ordered_files: list[str]):
       </div>
       <div class="g-section">
         <p>You can find more details about the benchmark dataset in this <a href="#" target="_blank" rel="noopener">Google Slides</a>.</p>
-        <p>For each question, please verify whether it can be answered (Q# Validation) using the provided map(s). If an image appears too small, click on the image . For questions with multiple images, please mark whether all images were required to correctly answer the question (Q# M). You may use tools like a ruler or calculator, but do not use online search.</p>
+        <p>For each question, please verify whether it can be answered (Q# Validation) using the provided map(s). If an image appears too small, click on the image. For questions with multiple images, please mark whether all images were required to correctly answer the question (Q# M). You may use tools like a ruler or calculator, but do not use online search.</p>
         {INSTRUCTIONS}
       </div>
       <div class="g-actions">
@@ -213,8 +212,7 @@ def write_user_start_page(uid: str, ordered_files: list[str]):
           return;
         }}
 
-        // If some answered, go to the *last* answered question
-        // (If you prefer "next unanswered", use lastAnsweredIndex+1 when available)
+        // Prefer next unanswered if available; otherwise last answered
         const next = (lastAnsweredIndex + 1 < PAGES.length) ? lastAnsweredIndex + 1 : lastAnsweredIndex;
         window.location.href = PAGES[next].url;
       }}
@@ -237,7 +235,6 @@ for uid, files in user_pages.items():
 print("\nOpen a user's Start page like:")
 some_uid = next(iter(user_pages.keys()))
 print(f"  {PAGES_BASE_URL}/{some_uid}_start.html")
-
 
 # =========================
 # Generate Thank You page (static, not Django)
@@ -263,7 +260,6 @@ def write_thankyou_page():
     <p>Your responses have been recorded.</p>
   </div>
 </body></html>""")
-
 
 # =========================
 # Generate Pages
@@ -292,9 +288,9 @@ for i, q in enumerate(questions):
             )
 
         if idx + 1 < len(pages_for_user):
-            next_url = f"https://map-survey-app.onrender.com/{pages_for_user[idx+1]}"
+            next_url = f"{PAGES_BASE_URL}/{pages_for_user[idx+1]}"
         else:
-            next_url = f"https://map-survey-app.onrender.com/thankyou.html"
+            next_url = f"{PAGES_BASE_URL}/thankyou.html"
 
         # Build HTML
         html_parts = [f"""<!DOCTYPE html>
@@ -318,7 +314,6 @@ for i, q in enumerate(questions):
 """]
 
         # Form card
-        # Escape hidden values for safety (quotes, etc.)
         qtext_attr = escape(qtext, quote=True)
         map_count_attr = escape(map_count, quote=True)
         spatial_attr = escape(spatial, quote=True)
@@ -326,7 +321,7 @@ for i, q in enumerate(questions):
 
         form_block = [f'''
     <div class="g-card">
-      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-{user_id}-{question_ref}">
+      <form action="{BACKEND_BASE_URL}/api/submit/" method="post" id="form-{user_id}-{question_ref}">
         <input type="hidden" name="user" value="{escape(user_id, quote=True)}">
         <input type="hidden" name="question_ref" value="{escape(question_ref, quote=True)}">
         <input type="hidden" name="question_text" value="{qtext_attr}">
@@ -361,17 +356,18 @@ for i, q in enumerate(questions):
 
         form_block.append('            </div>')
 
+        # --- Reason (hidden unless "no info" is selected) ---
         reason_wrap_id = f'noinfo-wrap-{user_id}-{question_ref}'
         reason_text_id = f'noinfo-text-{user_id}-{question_ref}'
         noinfo_label = "Please briefly explain what information was missing (required when selecting this option):"
 
         form_block.append(f'''
-                    <div id="{reason_wrap_id}" style="display:none; margin-top:12px;">
-                      <label class="g-q-title">{escape(noinfo_label)}</label>
-                      <textarea id="{reason_text_id}" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature." ></textarea>
-                      <div class="g-help">This field is required only when selecting “Map doesn't contain information to answer the question”.</div>
-                    </div>
-        ''')
+            <div id="{reason_wrap_id}" style="display:none; margin-top:12px;">
+              <label class="g-q-title">{escape(noinfo_label)}</label>
+              <textarea id="{reason_text_id}" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature."></textarea>
+              <div class="g-help">This field is required only when selecting “Map doesn't contain information to answer the question”.</div>
+            </div>
+''')
 
         # Necessary only for multi-map
         if map_count == "Multi":
@@ -386,7 +382,7 @@ for i, q in enumerate(questions):
 ''')
 
         # Submit button
-        button_label = "Submit & Next" if next_url.endswith("thankyou.html") is False else "Submit"
+        button_label = "Submit & Next" if not next_url.endswith("thankyou.html") else "Submit"
         form_block.append(f'''
           <div class="g-actions">
             <button class="g-btn" type="submit">{button_label}</button>
@@ -399,11 +395,6 @@ for i, q in enumerate(questions):
         html_parts.extend(form_block)
 
         # Inline script:
-        # - Lightbox for images
-        # - Prevent double submit in UI
-        # - Track answered per (user, question_ref)
-        # - Track progress (next URL or DONE)
-        # - On revisit, redirect to saved progress (if different page)
         html_parts.append(f"""
     <script>
   (function() {{
@@ -416,23 +407,6 @@ for i, q in enumerate(questions):
     function disableForm(){{
       const form = document.getElementById('form-{escape(user_id, quote=True)}-{escape(question_ref, quote=True)}');
       if (!form) return;
-      const NOINFO_VALUE = "Map doesn't contain information to answer the question";
-      const reasonWrap = document.getElementById("{escape(reason_wrap_id, quote=True)}");
-      const reasonText = document.getElementById("{escape(reason_text_id, quote=True)}");
-
-      function updateReasonVisibility() {{
-        const sel = form.querySelector('input[name="validity"]:checked');
-        const show = !!sel && sel.value === NOINFO_VALUE;
-        if (reasonWrap) reasonWrap.style.display = show ? 'block' : 'none';
-        if (reasonText) reasonText.required = !!show;
-      }}
-
-      // Initialize + bind change listeners to validity radios
-      Array.from(form.querySelectorAll('input[name="validity"]')).forEach(r => {{
-        r.addEventListener('change', updateReasonVisibility);
-      }});
-
-      updateReasonVisibility();
       form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
       const btn = form.querySelector('button.g-btn');
       if (btn) btn.textContent = 'Submitted';
@@ -451,20 +425,19 @@ for i, q in enumerate(questions):
       }});
     }});
 
-    // If already answered, disable and redirect if possible
-    (function stripOkParam(){{
+    // Handle ok=1 first, then strip the param from the URL
+    (function handleOkParam(){{
       const url = new URL(window.location.href);
-      if (url.searchParams.has('ok')) {{
+      const okFlag = url.searchParams.get('ok');
+      if (okFlag === '1') {{
+        localStorage.setItem(answeredKey, '1');
+        localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
+      }}
+      if (okFlag !== null) {{
         url.searchParams.delete('ok');
         window.history.replaceState({{}}, '', url.toString());
       }}
     }})();
-
-    // If the API redirected here with ok=1, mark as answered and advance progress
-    if (new URLSearchParams(window.location.search).get('ok') === '1') {{
-      localStorage.setItem(answeredKey, '1');
-      localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
-    }}
 
     // If saved progress points to a different page, navigate there
     const savedProgress = localStorage.getItem(progressKey);
@@ -477,30 +450,50 @@ for i, q in enumerate(questions):
     const form = document.getElementById('form-{escape(user_id, quote=True)}-{escape(question_ref, quote=True)}');
     if (!form) return;
 
+    // --- Toggle the reason box when "Map doesn't contain information..." is selected ---
+    const NOINFO_VALUE = "Map doesn't contain information to answer the question";
+    const reasonWrap = document.getElementById("{escape(reason_wrap_id, quote=True)}");
+    const reasonText = document.getElementById("{escape(reason_text_id, quote=True)}");
+
+    function updateReasonVisibility() {{
+      const chosen = form.querySelector('input[name="validity"]:checked');
+      const show = !!chosen && chosen.value === NOINFO_VALUE;
+      if (reasonWrap) reasonWrap.style.display = show ? 'block' : 'none';
+      if (reasonText) reasonText.required = !!show;
+    }}
+
+    // initialize + bind
+    Array.from(form.querySelectorAll('input[name="validity"]')).forEach(r => {{
+      r.addEventListener('change', updateReasonVisibility);
+    }});
+    updateReasonVisibility();
+
     // Prevent double-submit on the client,
     // but DO NOT disable inputs before the browser serializes the form.
     let submitted = false;
     form.addEventListener('submit', function(e) {{
       if (submitted) {{ e.preventDefault(); return; }}
-      const sel = form.querySelector('input[name="validity"]:checked');
-      const needsReason = !!sel && sel.value === NOINFO_VALUE;
+
+      // Enforce reason when the "no info" option is selected
+      const chosen = form.querySelector('input[name="validity"]:checked');
+      const needsReason = !!chosen && chosen.value === NOINFO_VALUE;
       if (needsReason) {{
         const val = (reasonText && reasonText.value || "").trim();
         if (!val) {{
           e.preventDefault();
-          // Keep button enabled so user can try again
           alert("Please provide a brief reason for why the map does not contain the required information.");
-          reasonText && reasonText.focus();
+          if (reasonText) reasonText.focus();
           return;
         }}
       }}
+
       submitted = true;
 
-      // ---- NEW: record progress *now* (for this page), before navigation ----
+      // Record progress now
       try {{
         localStorage.setItem(answeredKey, '1');
         localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
-      }} catch (err) {{ /* ignore quota/security errors */ }}
+      }} catch (err) {{}}
 
       // Disable only the submit button immediately (buttons don't affect payload)
       const btn = form.querySelector('button.g-btn');
@@ -509,8 +502,7 @@ for i, q in enumerate(questions):
         btn.textContent = 'Submitting...';
       }}
 
-      // Important: allow the browser to serialize & send the form first.
-      // Then (a moment later) lock the rest purely for UX.
+      // Then lock the rest (purely UX)
       setTimeout(() => {{
         form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
       }}, 100);

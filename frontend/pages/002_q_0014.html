@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>q_0001</title>
+  <title>q_0014</title>
   
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -88,18 +88,18 @@
 
 
     <div class="g-card">
-      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-002-q_0001">
+      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-002-q_0014">
         <input type="hidden" name="user" value="002">
-        <input type="hidden" name="question_ref" value="q_0001">
-        <input type="hidden" name="question_text" value="The 23rd Ave and E Union St Rezone (Draft) classifies each area into four distinct Rezone Areas. The rezone area that includes the &#x27;Midtown Center&#x27; and the &#x27;Post Office&#x27; overlaps with which four streets forming its borders?">
+        <input type="hidden" name="question_ref" value="q_0014">
+        <input type="hidden" name="question_text" value="Every &#x27;Ballard/Interbay/Northend Study Corridor&#x27; is associated with a unique number. Within the Ballard-Interbay MIC, which &#x27;Ballard/Interbay/Northend Study Corridor&#x27; number corresponds to the line where &#x27;Interbay Davus&#x27; and &#x27;Interbay Smith Cove&#x27; Industrial Lands Subareas intersect?">
         <input type="hidden" name="map_count" value="Single">
-        <input type="hidden" name="spatial_relationship" value="Border">
-        <input type="hidden" name="next_url" value="https://map-survey-app.onrender.com/002_q_0002.html">
+        <input type="hidden" name="spatial_relationship" value="Intersect">
+        <input type="hidden" name="next_url" value="https://map-survey-app.onrender.com/002_q_0015.html">
         <div class="g-section">
-          <div class="g-q-title">The 23rd Ave and E Union St Rezone (Draft) classifies each area into four distinct Rezone Areas. The rezone area that includes the &#x27;Midtown Center&#x27; and the &#x27;Post Office&#x27; overlaps with which four streets forming its borders?</div>
+          <div class="g-q-title">Every &#x27;Ballard/Interbay/Northend Study Corridor&#x27; is associated with a unique number. Within the Ballard-Interbay MIC, which &#x27;Ballard/Interbay/Northend Study Corridor&#x27; number corresponds to the line where &#x27;Interbay Davus&#x27; and &#x27;Interbay Smith Cove&#x27; Industrial Lands Subareas intersect?</div>
           <div class="g-img-grid">
 
-            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/seattle-planning/23rdAvenueUDF/image25_m0.png" alt="Map image">
+            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/seattle-planning/IndustrialMaritimeStrategyFinalEIS/image96_1.png" alt="Map image">
 
           </div>
           <label class="g-q-title">Answer <span class="g-muted-note">(optional)</span></label>
@@ -113,9 +113,9 @@
               <label class="g-radio"><input type="radio" name="validity" value="Map doesn&#x27;t contain information to answer the question" required> Map doesn&#x27;t contain information to answer the question</label>
             </div>
 
-            <div id="noinfo-wrap-002-q_0001" style="display:none; margin-top:12px;">
+            <div id="noinfo-wrap-002-q_0014" style="display:none; margin-top:12px;">
               <label class="g-q-title">Please briefly explain what information was missing (required when selecting this option):</label>
-              <textarea id="noinfo-text-002-q_0001" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature."></textarea>
+              <textarea id="noinfo-text-002-q_0014" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature."></textarea>
               <div class="g-help">This field is required only when selecting “Map doesn't contain information to answer the question”.</div>
             </div>
 
@@ -131,13 +131,13 @@
     <script>
   (function() {
     const USER = "002";
-    const QREF = "q_0001";
-    const NEXT = "https://map-survey-app.onrender.com/002_q_0002.html";
+    const QREF = "q_0014";
+    const NEXT = "https://map-survey-app.onrender.com/002_q_0015.html";
     const answeredKey = `answered:${USER}:${QREF}`;
     const progressKey = `progress:${USER}`;
 
     function disableForm(){
-      const form = document.getElementById('form-002-q_0001');
+      const form = document.getElementById('form-002-q_0014');
       if (!form) return;
       form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
       const btn = form.querySelector('button.g-btn');
@@ -179,13 +179,13 @@
       if (savedPath !== thisPath) { window.location.replace(savedProgress); return; }
     }
 
-    const form = document.getElementById('form-002-q_0001');
+    const form = document.getElementById('form-002-q_0014');
     if (!form) return;
 
     // --- Toggle the reason box when "Map doesn't contain information..." is selected ---
     const NOINFO_VALUE = "Map doesn't contain information to answer the question";
-    const reasonWrap = document.getElementById("noinfo-wrap-002-q_0001");
-    const reasonText = document.getElementById("noinfo-text-002-q_0001");
+    const reasonWrap = document.getElementById("noinfo-wrap-002-q_0014");
+    const reasonText = document.getElementById("noinfo-text-002-q_0014");
 
     function updateReasonVisibility() {
       const chosen = form.querySelector('input[name="validity"]:checked');
