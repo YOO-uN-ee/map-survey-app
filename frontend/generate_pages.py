@@ -253,6 +253,21 @@ def write_thankyou_page():
   p{color:#5f6368}
   a{color:#5e35b1;text-decoration:none}
 </style>
+                <script>
+  // Clear localStorage keys used by the survey
+  (function() {
+    try {
+      const keys = Object.keys(localStorage);
+      for (const k of keys) {
+        if (k.startsWith('answered:') || k.startsWith('progress:')) {
+          localStorage.removeItem(k);
+        }
+      }
+    } catch (err) {
+      console.error("Error clearing localStorage:", err);
+    }
+  })();
+</script>
 </head>
 <body>
   <div class="wrap">
@@ -426,17 +441,13 @@ for i, q in enumerate(questions):
     }});
 
     // Handle ok=1 first, then strip the param from the URL
-    (function handleOkParam(){{
+
+    (function stripOkParam(){{
       const url = new URL(window.location.href);
-      const okFlag = url.searchParams.get('ok');
-      if (okFlag === '1') {{
-        localStorage.setItem(answeredKey, '1');
-        localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
-      }}
-      if (okFlag !== null) {{
+      if (url.searchParams.has('ok')) {
         url.searchParams.delete('ok');
-        window.history.replaceState({{}}, '', url.toString());
-      }}
+        window.history.replaceState({}, '', url.toString());
+      }
     }})();
 
     // If saved progress points to a different page, navigate there

@@ -50,7 +50,7 @@
   {
       "question_text": "Along Pine Street and Pike Street, how many 'Future Redevelopment & Renovation Project' areas overlap with the 'West Focus Area'?",
       "expected_answer": "7",
-      "image_urls": ["seattle-planning/507SeattleStudio_Web/27_m1.png"],
+      "image_urls": ["seattle-planning/507SeattleStudio_Web/image27_m1.png"],
       "map_count": "Single",
       "spatial_relationship": "Within"
   },
@@ -58,7 +58,7 @@
   {
       "question_text": "Within 'Commercial & Residential Zone Areas' of Seattle's Georgetown neighborhood, which streets does the Anchor Location lie on?",
       "expected_answer": "13TH AVE S; S ALBRO PL",
-      "image_urls": ["seattle-planning/CouncilAdopted2020/319_1.png"],
+      "image_urls": ["seattle-planning/CouncilAdopted2020/image319_1.png"],
       "map_count": "Single",
       "spatial_relationship": "Intersect"
   },
@@ -66,7 +66,7 @@
   {
       "question_text": "Identify the 'Level of Service Screenline' labeled as 6.12 in 2004 City of Seattle. Which Existing Land Use categories (in 2016 City of Seattle) does this line intersects with?",
       "expected_answer": "Single Family; Major Institution And Public Facilities/Utilities",
-      "image_urls": ["seattle-planning/CouncilAdopted2020/436_1.png", "seattle-planning/CouncilAdopted2020/459_1.png"],
+      "image_urls": ["seattle-planning/CouncilAdopted2020/image436_1.png", "seattle-planning/CouncilAdopted2020/image459_1.png"],
       "map_count": "Multi",
       "spatial_relationship": "Intersect"
   },
@@ -74,7 +74,7 @@
   {
       "question_text": "Which Seattle Parks and Recreation features (as given in the legend) is located closest to the 'Marina' near Elliot Bay in 2016?",
       "expected_answer": "Community Center",
-      "image_urls": ["seattle-planning/CouncilAdopted2020/462_1.png", "seattle-planning/CouncilAdopted2020/546_1.png"],
+      "image_urls": ["seattle-planning/CouncilAdopted2020/image462_1.png", "seattle-planning/CouncilAdopted2020/image546_1.png"],
       "map_count": "Multi",
       "spatial_relationship": "Distance"
   },
@@ -82,7 +82,7 @@
   {
       "question_text": "Every region in Seattle Public Utilities Water Service Area is classified under one of the five Service Area categories. Within the Service Area Boundary, which Service Area categories share a boundary with the Cedar River Watershed.",
       "expected_answer": "Wholesale Customer; Other",
-      "image_urls": ["seattle-planning/CouncilAdopted2020/578_1.png"],
+      "image_urls": ["seattle-planning/CouncilAdopted2020/image578_1.png"],
       "map_count": "Single",
       "spatial_relationship": "Border"
   },
