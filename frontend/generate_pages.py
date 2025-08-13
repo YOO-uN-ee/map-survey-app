@@ -339,7 +339,7 @@ for i, q in enumerate(questions):
 ''']
 
         for url in image_urls:
-            full_url = f"https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/{url}?token=A62UYO4BIVMP452H6PNIGS3ITTKRO"
+            full_url = f"https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/{url}"
             form_block.append(f'            <img src="{escape(full_url, quote=True)}" alt="Map image">')
 
         form_block.append('''
