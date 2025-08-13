@@ -158,14 +158,10 @@
     });
 
     // Handle ok=1 first, then strip the param from the URL
-    (function handleOkParam(){
+
+    (function stripOkParam(){
       const url = new URL(window.location.href);
-      const okFlag = url.searchParams.get('ok');
-      if (okFlag === '1') {
-        localStorage.setItem(answeredKey, '1');
-        localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
-      }
-      if (okFlag !== null) {
+      if (url.searchParams.has('ok')) {
         url.searchParams.delete('ok');
         window.history.replaceState({}, '', url.toString());
       }

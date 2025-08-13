@@ -9,6 +9,21 @@
   p{color:#5f6368}
   a{color:#5e35b1;text-decoration:none}
 </style>
+                <script>
+  // Clear localStorage keys used by the survey
+  (function() {
+    try {
+      const keys = Object.keys(localStorage);
+      for (const k of keys) {
+        if (k.startsWith('answered:') || k.startsWith('progress:')) {
+          localStorage.removeItem(k);
+        }
+      }
+    } catch (err) {
+      console.error("Error clearing localStorage:", err);
+    }
+  })();
+</script>
 </head>
 <body>
   <div class="wrap">

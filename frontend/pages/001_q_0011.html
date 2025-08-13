@@ -99,7 +99,7 @@
           <div class="g-q-title">Every region in Seattle Public Utilities Water Service Area is classified under one of the five Service Area categories. Within the Service Area Boundary, which Service Area categories share a boundary with the Cedar River Watershed.</div>
           <div class="g-img-grid">
 
-            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/seattle-planning/CouncilAdopted2020/578_1.png" alt="Map image">
+            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/seattle-planning/CouncilAdopted2020/image578_1.png" alt="Map image">
 
           </div>
           <label class="g-q-title">Answer <span class="g-muted-note">(optional)</span></label>
@@ -158,14 +158,10 @@
     });
 
     // Handle ok=1 first, then strip the param from the URL
-    (function handleOkParam(){
+
+    (function stripOkParam(){
       const url = new URL(window.location.href);
-      const okFlag = url.searchParams.get('ok');
-      if (okFlag === '1') {
-        localStorage.setItem(answeredKey, '1');
-        localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
-      }
-      if (okFlag !== null) {
+      if (url.searchParams.has('ok')) {
         url.searchParams.delete('ok');
         window.history.replaceState({}, '', url.toString());
       }

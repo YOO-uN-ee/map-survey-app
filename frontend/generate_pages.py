@@ -444,10 +444,10 @@ for i, q in enumerate(questions):
 
     (function stripOkParam(){{
       const url = new URL(window.location.href);
-      if (url.searchParams.has('ok')) {
+      if (url.searchParams.has('ok')) {{
         url.searchParams.delete('ok');
-        window.history.replaceState({}, '', url.toString());
-      }
+        window.history.replaceState({{}}, '', url.toString());
+      }}
     }})();
 
     // If saved progress points to a different page, navigate there
