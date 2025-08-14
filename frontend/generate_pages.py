@@ -127,6 +127,7 @@ INSTRUCTIONS = """
     <p><strong>Numerical Answers</strong></p>
     <ul>
       <li>Include units as indicated on the map <em>(Don’t convert 1200m to 1.2km)</em></li>
+      <li>If both map frame and ruler scale is available, <u>use the ruler scale</u></li>
       <li>If question asks for an area, use &#123;unit&#125;&#178;</li>
       <li>Use numerical values <em>(e.g., 4 instead of four)</em></li>
     </ul>
@@ -172,11 +173,15 @@ def write_user_start_page(uid: str, ordered_files: list[str]):
   <div class="g-container">
     <div class="g-card">
       <div class="g-card-header">
-        <h1 class="g-title">Thank you for participating!</h1>
+        <h1 class="g-title">Cartographical Reasoning Annotations</h1>
         <p class="g-subtitle">Please read the instructions below, then click Next to begin or resume.</p>
       </div>
       <div class="g-section">
-        <p>You can find more details about the benchmark dataset in this <a href="#" target="_blank" rel="noopener">Google Slides</a>.</p>
+        <p>Thank you for participating!</p>
+        <p><strong>If you are on secret/incognito mode, please switch to regular browsing mode before starting.</strong></p>
+        <p>Your progress will be saved automatically, so you can exit at any time and return to complete the annotations. When you return, you will be directed to the last unanswered questions.</p>
+        <p></p>
+        <p>You can find more details about the benchmark dataset in this <a href="https://docs.google.com/presentation/d/18Uyi8yrRcqPfmEPfHU6XJw8pYBatW2l3vv4OiM5GGqQ/edit?usp=sharing" target="_blank" rel="noopener">Google Slides</a>.</p>
         <p>For each question, please verify whether it can be answered (Q# Validation) using the provided map(s). If an image appears too small, click on the image. For questions with multiple images, please mark whether all images were required to correctly answer the question (Q# M). You may use tools like a ruler or calculator, but do not use online search.</p>
         {INSTRUCTIONS}
       </div>
@@ -389,7 +394,7 @@ for i, q in enumerate(questions):
             form_block.append('''
             <div style="margin-top:16px;">
               <label class="g-q-title">Are all images necessary to answer precisely without guessing?</label>
-              <div class="g-radio-group">
+              <div class="g-rad io-group">
                 <label class="g-radio"><input type="radio" name="necessary" value="yes"> Yes</label>
                 <label class="g-radio"><input type="radio" name="necessary" value="no"> No</label>
               </div>
