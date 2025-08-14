@@ -16,7 +16,7 @@
   },
 
   {
-      "question_text": "In the neighborhood node crossed by S Jackson Street and located near Washington Middle School, there are two Current Transit stops. Which 'Central Greenway Phase 3' is located closer to these two stops?",
+      "question_text": "In the neighborhood node crossed by S Jackson Street and located near Washington Middle School, there are two Current Transit stops. Which 'Central Greenway Phase 3: Alternative' is located closer to these two stops?",
       "expected_answer": "Central Greenway Phase 3: Alternative 2",
       "image_urls": ["seattle-planning/23rdAvenueUDF/image35_m0.png"],
       "map_count": "Single",
@@ -32,7 +32,7 @@
   },
 
   {
-      "question_text": "In the current zoning of 130th/145th, all areas are assigned one of the city’s ten Zoning Categories. The area labeled NC3P-55 shares border with which other Zoning Categories?",
+      "question_text": "In the current zoning of 130th/145th, all areas are assigned to one of the city’s ten Zoning Categories. The area labeled NC3P-55 shares border with which other Zoning Categories?",
       "expected_answer": "Lowrise 1; Lowrise 3",
       "image_urls": ["seattle-planning/130_145_Alternatives__2022_1202/image6_2.png"],
       "map_count": "Single",
@@ -40,7 +40,7 @@
   },
 
   {
-      "question_text": "In the Combined zoning of 130th/145th, the area labeled NC2-55 shares its border with the which zoning category. Give the unit code as given on the map.",
+      "question_text": "In the Combined zoning of 130th/145th, the area labeled NC2-55 shares its border with which zoning category. Provide the unit code exactly as shown on the map.",
       "expected_answer": "LR1",
       "image_urls": ["seattle-planning/130_145_Alternatives__2022_1202/image8_2.png"],
       "map_count": "Single",
@@ -56,7 +56,7 @@
   },
 
   {
-      "question_text": "Within 'Commercial & Residential Zone Areas' of Seattle's Georgetown neighborhood, which streets does the Anchor Location lie on?",
+      "question_text": "Within the 'Commercial & Residential Zone Areas' of Seattle's Georgetown neighborhood, which two streets does the Anchor Location lie on?",
       "expected_answer": "13TH AVE S; S ALBRO PL",
       "image_urls": ["seattle-planning/CouncilAdopted2020/image319_1.png"],
       "map_count": "Single",
@@ -64,7 +64,7 @@
   },
 
   {
-      "question_text": "Identify the 'Level of Service Screenline' labeled as 6.12 in 2004 City of Seattle. Which Existing Land Use categories (in 2016 City of Seattle) does this line intersects with?",
+      "question_text": "Identify the 'Level of Service Screenline' labeled 6.12 in 2004 City of Seattle. Which Existing Land Use categories (in 2016 City of Seattle) does this line intersect?",
       "expected_answer": "Single Family; Major Institution And Public Facilities/Utilities",
       "image_urls": ["seattle-planning/CouncilAdopted2020/image436_1.png", "seattle-planning/CouncilAdopted2020/image459_1.png"],
       "map_count": "Multi",
@@ -80,7 +80,7 @@
   },
 
   {
-      "question_text": "Every region in Seattle Public Utilities Water Service Area is classified under one of the five Service Area categories. Within the Service Area Boundary, which Service Area categories share a boundary with the Cedar River Watershed.",
+      "question_text": "Every region in the Seattle Public Utilities Water Service Area is classified under one of the five Service Area categories. Within the Service Area Boundary, which Service Area categories share a boundary with the Cedar River Watershed.",
       "expected_answer": "Wholesale Customer; Other",
       "image_urls": ["seattle-planning/CouncilAdopted2020/image578_1.png"],
       "map_count": "Single",
@@ -104,7 +104,7 @@
   },
 
   {
-      "question_text": "Every 'Ballard/Interbay/Northend Study Corridor' is associated with a unique number. Within the Ballard-Interbay MIC, which 'Ballard/Interbay/Northend Study Corridor' number corresponds to the line where 'Interbay Davus' and 'Interbay Smith Cove' Industrial Lands Subareas intersect?",
+      "question_text": "Every 'Ballard/Interbay/Northend Study Corridor' is associated with a unique number. Within the Ballard-Interbay MIC, which corridor number corresponds to the line where the 'Interbay Davus' and the 'Interbay Smith Cove' Industrial Lands Subareas intersect?",
       "expected_answer": "7",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image96_1.png"],
       "map_count": "Single",
@@ -112,7 +112,7 @@
   },
 
   {
-      "question_text": "Every 'Duwamish Study Corridor Main' is associated with a unique number. Which 'Duwamish Study Corridor Main' number runs along the eastern boundary of the Duwamish MIC?",
+      "question_text": "Every 'Duwamish Study Corridor Main' is associated with a unique number. Which corridor number runs along the eastern boundary of the Duwamish MIC?",
       "expected_answer": "17",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image97_1.png"],
       "map_count": "Single",
@@ -120,7 +120,7 @@
   },
 
   {
-      "question_text": "Which 'Race and Social Equity Composite Index' categories cover the 'Interbay Dravus' within the Ballard–Interbay MIC of City of Seattle? Exclude the word 'Disadvantage' from each category names.",
+      "question_text": "Which 'Race and Social Equity Composite Index' categories cover the 'Interbay Dravus' within the Ballard–Interbay MIC of the City of Seattle? Exclude the word 'Disadvantage' from each category name.",
       "expected_answer": "Middle; Second Lowest; Lowest",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image110_1.png", "seattle-planning/IndustrialMaritimeStrategyFinalEIS/image128_1.png"],
       "map_count": "Multi",
@@ -128,7 +128,7 @@
   },
 
   {
-      "question_text": "What is the name of the 'Project-Specific Air Quality Monitoring Location' furthest from any Manufacturing Industrial Centers boundary?",
+      "question_text": "What is the name of the 'Project-Specific Air Quality Monitoring Location' that is farthest from any Manufacturing Industrial Centers boundary?",
       "expected_answer": "South Park #2",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image207_1.png"],
       "map_count": "Single",
@@ -136,7 +136,7 @@
   },
 
   {
-      "question_text": "Identify the area within the 0.25 Mile Buffer from Ballard-Interbay MIC where the 'Abandoned landfill' overlaps with the '1000' methane buffer'. How many 'Toxics Cleanup' points are located within this area?",
+      "question_text": "Within the 0.25-mile buffer of the Ballard–Interbay MIC, identify the area where the 'Abandoned Landfill' overlaps with the '1000' methane buffer. How many 'Toxics Cleanup' points are located within this area?",
       "expected_answer": "1",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image323_1.png"],
       "map_count": "Single",
@@ -144,7 +144,7 @@
   },
 
   {
-      "question_text": "Within the southern section of Ballard-Interbay MIC, identify the two concave areas along the boundary. How many 'Hazardous Waste and Toxics Reduction' points are located within these areas?",
+      "question_text": "Within the southern section of the Ballard-Interbay MIC, identify the two concave areas along its boundary. How many 'Hazardous Waste and Toxics Reduction' points are located within these areas?",
       "expected_answer": "3",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image324_1.png"],
       "map_count": "Single",
@@ -152,7 +152,7 @@
   },
 
   {
-      "question_text": "Identify the Noise-sensitive Area with the smallest area size. In which Industrial Lands Subareas is this area located within?",
+      "question_text": "Identify the 'Noise-sensitive Area' with the smallest area. In which Industrial Lands Subareas is it located within?",
       "expected_answer": "SoDo Stadium",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image354_1.png", 
       "seattle-planning/IndustrialMaritimeStrategyFinalEIS/image352_1.png"],
@@ -161,7 +161,7 @@
   },
 
   {
-      "question_text": "What is the name of the 'High Sensitivity Locations' located closest to the Georgetown Industrial Lands Subareas?",
+      "question_text": "What is the name of the 'High Sensitivity Locations' closest to the Georgetown Industrial Lands Subareas?",
       "expected_answer": "West Duwamish Greenbelt",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image377_1.png"],
       "map_count": "Single",
@@ -169,21 +169,21 @@
   },
 
   {
-      "question_text": "Within the boundaries of the Ballard-Interbay MIC, which 'Alternative 3 - Targeted' category does the 'Bicycle / Pedestrian Multi-Use Trail' cross through?",
+      "question_text": "Within the boundaries of the Ballard-Interbay MIC, which 'Alternative 3 - Targeted' category does the 'Bicycle / Pedestrian Multi-Use Trail' cross?",
       "expected_answer": "Maritime, Manufacturing & Logistics",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image407_1.png"],
       "map_count": "Single",
       "spatial_relationship": "Intersect"},
 
   {
-      "question_text": "Which is the northernmost Settlements located along the shoreline of Lake Washington in 1902?",
+      "question_text": "Which is the northernmost 'Settlements' located along the shoreline of Lake Washington in 1902?",
       "expected_answer": "Kirkland",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image438_m0.png"],
       "map_count": "Single",
       "spatial_relationship": "Border"},
 
   {
-      "question_text": "Every Screenline in the City of Seattle is associated with a unique ID of form {NUMBER}.{NUMBER}. What is the ID of the Screenline that crosses through a Public Land area?",
+      "question_text": "Every 'Screenline' in the City of Seattle is associated with a unique ID in the format {NUMBER}.{NUMBER}. What is the ID of the Screenline that crosses a Public Land area?",
       "expected_answer": "7.11",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image570_1.png"],
       "map_count": "Single",
@@ -191,7 +191,7 @@
   },
 
   {
-      "question_text": "In the SoDo Stadium Industrial Lands Subareas, how many 'Terminal & Rail Yard Gate' points are located outside the boundaries of both Intermodal Facilities?",
+      "question_text": "In the SoDo Stadium Industrial Lands Subareas, how many 'Terminal & Rail Yard Gate' points are located outside the boundaries of both 'Intermodal Facilities'?",
       "expected_answer": "7",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image590_1.png"],
       "map_count": "Single",
@@ -199,14 +199,14 @@
   },
 
   {
-      "question_text": "Identify all screenlines that intersect the SoDo Stadium Industrial Landas Subareas. Which of these is nearest to a Ferry line?",
+      "question_text": "Identify all 'Screenline's that intersect the SoDo Stadium Industrial Landas Subareas. Which of these is closest to a 'Ferry' line?",
       "expected_answer": "D",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image598_1.png"],
       "map_count": "Single",
       "spatial_relationship": "Distance"},
 
   {
-      "question_text": "Which National Register Districts overlap with both the Ballard and Interbay Dravus Industrial Lands Subareas within the Ballard-Interbay MIC?",
+      "question_text": "Which 'National Register Districts' overlap with both the 'Ballard' and 'Interbay Dravus' Industrial Lands Subareas within the Ballard-Interbay MIC?",
       "expected_answer": "Chittenden Locks and Lake Washington Ship Canal; Washington Ship Canal",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image687_1.png"],
       "map_count": "Single",
@@ -214,7 +214,7 @@
   },
 
   {
-      "question_text": "How many 'Historic- Not Evaluated' Archaeological Resources are located within the Georgetown Industrial Lands Subareas?",
+      "question_text": "How many 'Historic- Not Evaluated' Archaeological Resources are located within the 'Georgetown' Industrial Lands Subareas?",
       "expected_answer": "5",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image691_1.png"],
       "map_count": "Single",
@@ -222,7 +222,7 @@
   },
 
   {
-      "question_text": "Identify the segments of 'Bicycle/Pedestrian Multi-Use Trail' along the Pudget Sound shorline in the City of Seattle. How many 'Public Boat Ramps' are located along these segments?",
+      "question_text": "Identify the segments of the 'Bicycle/Pedestrian Multi-Use Trail' along the Pudget Sound shorline in the City of Seattle. How many 'Public Boat Ramps' are located along these segments?",
       "expected_answer": "5",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image717_1.png"],
       "map_count": "Single",
@@ -230,7 +230,7 @@
   },
 
   {
-      "question_text": "Which Fire Battalions in the City of Seattle do not contain any hospitals within their boundaries. Answer in form Battalion #.",
+      "question_text": "Which Fire Battalions in the City of Seattle have no hospitals within their boundaries? Provide the answer in the format 'Battalion #'.",
       "expected_answer": "Battalion 7",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image742_1.png"],
       "map_count": "Single",
@@ -238,7 +238,7 @@
   },
 
   {
-      "question_text": "Identify the Seattle Public Libraries located closest to the eastern boundary of the SoDO Stadium Industrials Lands Subarea. Within which Police Beat is it located.",
+      "question_text": "Identify the 'Seattle Public Libraries' point located closest to the eastern boundary of the 'SoDO Stadium' Industrials Lands Subarea. In which 'Police Beat' is it located.",
       "expected_answer": "R1",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image751_1.png", "seattle-planning/IndustrialMaritimeStrategyFinalEIS/image760_1.png"],
       "map_count": "Multi",
@@ -246,7 +246,7 @@
   },
 
   {
-      "question_text": "Seattle Public Schools classifies every 'Elementary Attendance Area' into 12 categories. Which category contains the 'Highly Capable Cohort Site'?",
+      "question_text": "Seattle Public Schools classifies every 'Elementary Attendance Area' into one of 12 categories. Which category contains the 'Highly Capable Cohort Site'?",
       "expected_answer": "Eckstein",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image761_1.png"],
       "map_count": "Single",
@@ -254,7 +254,7 @@
   },
 
   {
-      "question_text": "How many 'King County CSO' points lies on the boundary of the 'Georgetown' Industrial Lands Subareas within the Duwamish MIC?",
+      "question_text": "How many 'King County CSO' points lie on the boundary of the 'Georgetown' Industrial Lands Subareas within the Duwamish MIC?",
       "expected_answer": "6",
       "image_urls": ["seattle-planning/IndustrialMaritimeStrategyFinalEIS/image784_1.png"],
       "map_count": "Single",
@@ -262,7 +262,7 @@
   },
 
   {
-      "question_text": "In the Yesler Terrace Redevelopment, how many buildings are within 'The Green Loop' boundary. (All buildings are associated with a Building Key)",
+      "question_text": "In the Yesler Terrace Redevelopment, how many buildings are located within the boundary of 'The Green Loop'. (All buildings are associated with a Building Key.)",
       "expected_answer": "5",
       "image_urls": ["seattle-planning/lfs-existing-conditions-and-context-memorandum/image68_m0.png"],
       "map_count": "Single", 
