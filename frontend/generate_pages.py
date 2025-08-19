@@ -7,7 +7,7 @@ from html import escape
 # =========================
 # Paths & Config
 # =========================
-QUESTION_FILE = "questions_config.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
+QUESTION_FILE = "questions_config2.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
 USER_FILE = "users.csv"                   # CSV with headers: user_id,user_name
 OUTPUT_DIR = "pages"                      # Generated HTML output
 ASSIGNMENTS_FILE = "assignments.json"     # Optional: mapping question_ref -> [user_id, user_id, user_id]
@@ -42,7 +42,7 @@ if not users:
 # =========================
 # We also generate an internal question_ref for each question (q_0001, q_0002, ...)
 question_refs = []
-for idx, _ in enumerate(questions, start=1):
+for idx, _ in enumerate(questions, start=70):
     question_refs.append(f"q_{idx:04d}")
 
 assignments = {ref: [] for ref in question_refs}
