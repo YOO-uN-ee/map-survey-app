@@ -7,10 +7,11 @@ from html import escape
 # =========================
 # Paths & Config
 # =========================
-QUESTION_FILE = "questions_config2.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
+QUESTION_FILE = "shuffle_questions_j.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
 USER_FILE = "users.csv"                   # CSV with headers: user_id,user_name
 OUTPUT_DIR = "pages"                      # Generated HTML output
 ASSIGNMENTS_FILE = "assignments.json"     # Optional: mapping question_ref -> [user_id, user_id, user_id]
+STARTING_IDX = 70
 
 # Where the static HTML pages are served (use a local HTTP server)
 #   cd pages && python -m http.server 8001
@@ -42,7 +43,7 @@ if not users:
 # =========================
 # We also generate an internal question_ref for each question (q_0001, q_0002, ...)
 question_refs = []
-for idx, _ in enumerate(questions, start=70):
+for idx, _ in enumerate(questions, start=STARTING_IDX):
     question_refs.append(f"q_{idx:04d}")
 
 assignments = {ref: [] for ref in question_refs}
