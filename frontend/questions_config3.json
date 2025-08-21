@@ -831,7 +831,7 @@
         "spatial_relationship": "Orientation"
     },
     {
-        "question_text": "Surrounding the La Vida Mission of New Mexico, which county is the Lake Valley School located in?",
+        "question_text": "Surrounding the La Vida Mission of New Mexico, which county (CO.) is the Lake Valley School located in?",
         "expected_answer": "SAN JUAN CO",
         "image_urls": [
             "national-parks/732920/image1_m125.png",
