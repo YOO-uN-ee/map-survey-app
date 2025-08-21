@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>015 — Start</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g-purple: #673ab7;
+    --g-purple-dark: #5e35b1;
+    --g-bg: #f6f6f6;
+    --g-text: #202124;
+    --g-muted: #5f6368;
+    --g-card: #ffffff;
+    --g-border: #dadce0;
+  }
+  html, body { margin: 0; background: var(--g-bg); color: var(--g-text); font-family: Roboto, Arial, sans-serif; }
+  .g-container { max-width: 880px; margin: 24px auto 64px auto; padding: 0 16px; }
+  .g-card { background: var(--g-card); border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.24); border: 1px solid var(--g-border); margin-bottom: 16px; }
+  .g-card-header { padding: 24px 24px 12px 24px; border-bottom: 1px solid var(--g-border); }
+  .g-title { font-size: 28px; font-weight: 500; margin: 0 0 4px 0; }
+  .g-subtitle { color: var(--g-muted); font-size: 14px; margin: 0; }
+  .g-section { padding: 20px 24px 24px 24px; }
+  .g-q-title { font-size: 18px; font-weight: 500; margin: 0 0 12px 0; }
+  .g-required::after { content: " *"; color: #d93025; font-weight: 700; }
+  .g-help { color: var(--g-muted); font-size: 12px; margin-top: 6px; }
+  .g-img-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0 8px 0; }
+  .g-img-grid img { width: 100%; height: auto; border: 1px solid var(--g-border); border-radius: 6px; background: #fff; cursor: zoom-in; }
+  textarea { width: 100%; min-height: 96px; resize: vertical; padding: 10px 12px; border: 1px solid var(--g-border); border-radius: 6px; font-family: Roboto, Arial, sans-serif; font-size: 14px; box-sizing: border-box; }
+  .g-radio-group { margin-top: 6px; }
+  .g-radio { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 14px; }
+  .g-actions { display: flex; justify-content: flex-start; gap: 12px; padding: 16px 24px 24px 24px; }
+  .g-btn { background: var(--g-purple); color: #fff; border: none; border-radius: 24px; padding: 10px 20px; font-weight: 500; cursor: pointer; }
+  .g-btn[disabled] { opacity: .6; cursor: not-allowed; }
+  .g-btn:hover { background: var(--g-purple-dark); }
+  details.g-instructions summary { font-weight: 500; cursor: pointer; list-style: none; }
+  details.g-instructions summary::-webkit-details-marker { display:none; }
+  details.g-instructions summary:after { content: "▾"; float: right; color: var(--g-muted); }
+  details.g-instructions[open] summary:after { content: "▴"; }
+  .g-muted-note { color: var(--g-muted); font-size: 12px; margin-left: 4px; }
+  /* Image lightbox */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: none; align-items: center; justify-content: center; z-index: 9999; }
+  .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.5); }
+  .lightbox.visible { display: flex; }
+  .lightbox:after { content: "×"; position: fixed; top: 16px; right: 24px; font-size: 28px; color: #fff; cursor: pointer; }
+</style>
+
+</head>
+<body>
+  <div class="g-container">
+    <div class="g-card">
+      <div class="g-card-header">
+        <h1 class="g-title">Cartographical Reasoning Annotations</h1>
+        <p class="g-subtitle">Please read the instructions below, then click Next to begin or resume.</p>
+      </div>
+      <div class="g-section">
+        <p>Thank you for participating!</p>
+        <p><strong>If you are on secret/incognito mode, please switch to regular browsing mode before starting.</strong></p>
+        <p>Your progress will be saved automatically, so you can exit at any time and return to complete the annotations. When you return, you will be directed to the last unanswered questions.</p>
+        <p></p>
+        <p>You can find more details about the benchmark dataset in this <a href="https://docs.google.com/presentation/d/18Uyi8yrRcqPfmEPfHU6XJw8pYBatW2l3vv4OiM5GGqQ/edit?usp=sharing" target="_blank" rel="noopener">Google Slides</a>.</p>
+        <p>For each question, please verify whether it can be answered (Q# Validation) using the provided map(s). If an image appears too small, click on the image. For questions with multiple images, please mark whether all images were required to correctly answer the question (Q# M). You may use tools like a ruler or calculator, but do not use online search.</p>
+        
+<details class="g-instructions" open>
+  <summary>Instructions</summary>
+  <div style="margin-top:12px;">
+    <p><strong>General</strong></p>
+    <ul>
+      <li>If question can be answered, write answer in short answer box</li>
+      <li>If answer is a text from the map, copy it as it appears</li>
+    </ul>
+    <p><strong>Numerical Answers</strong></p>
+    <ul>
+      <li>Include units as indicated on the map <em>(Don’t convert 1200m to 1.2km)</em></li>
+      <li>If both map frame and ruler scale is available, <u>use the ruler scale</u></li>
+      <li>If question asks for an area, use &#123;unit&#125;&#178;</li>
+      <li>Use numerical values <em>(e.g., 4 instead of four)</em></li>
+    </ul>
+    <p><strong>Directional Answers</strong></p>
+    <ul>
+      <li>Use 8 cardinal directions only: North, North East, East, South East, South, South West, West, North West</li>
+      <li>Write 'North' or 'South' before 'East' or 'West'</li>
+      <li><strong>Notice that the north arrow compass do not always point upward</strong></li>
+    </ul>
+    <p><strong>Multi-Part Answers</strong></p>
+    <ul>
+      <li>Separate with semicolon (;) <em>(e.g., Zone A; Zone B)</em></li>
+    </ul>
+  </div>
+</details>
+
+      </div>
+      <div class="g-actions">
+        <button id="go-next" class="g-btn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const USER = "015";
+      // Ordered list of this user's pages (qref + url)
+      const PAGES = [{"qref": "q_1001", "url": "015_q_1001.html"}, {"qref": "q_1006", "url": "015_q_1006.html"}, {"qref": "q_1011", "url": "015_q_1011.html"}, {"qref": "q_1016", "url": "015_q_1016.html"}, {"qref": "q_1021", "url": "015_q_1021.html"}, {"qref": "q_1026", "url": "015_q_1026.html"}, {"qref": "q_1031", "url": "015_q_1031.html"}, {"qref": "q_1036", "url": "015_q_1036.html"}, {"qref": "q_1041", "url": "015_q_1041.html"}, {"qref": "q_1046", "url": "015_q_1046.html"}, {"qref": "q_1051", "url": "015_q_1051.html"}, {"qref": "q_1056", "url": "015_q_1056.html"}, {"qref": "q_1061", "url": "015_q_1061.html"}, {"qref": "q_1066", "url": "015_q_1066.html"}, {"qref": "q_1071", "url": "015_q_1071.html"}, {"qref": "q_1076", "url": "015_q_1076.html"}, {"qref": "q_1081", "url": "015_q_1081.html"}, {"qref": "q_1086", "url": "015_q_1086.html"}, {"qref": "q_1091", "url": "015_q_1091.html"}, {"qref": "q_1096", "url": "015_q_1096.html"}, {"qref": "q_1101", "url": "015_q_1101.html"}, {"qref": "q_1106", "url": "015_q_1106.html"}, {"qref": "q_1111", "url": "015_q_1111.html"}, {"qref": "q_1116", "url": "015_q_1116.html"}, {"qref": "q_1121", "url": "015_q_1121.html"}, {"qref": "q_1126", "url": "015_q_1126.html"}, {"qref": "q_1131", "url": "015_q_1131.html"}, {"qref": "q_1136", "url": "015_q_1136.html"}, {"qref": "q_1141", "url": "015_q_1141.html"}, {"qref": "q_1146", "url": "015_q_1146.html"}, {"qref": "q_1151", "url": "015_q_1151.html"}, {"qref": "q_1156", "url": "015_q_1156.html"}];
+
+      function go() {
+        if (!PAGES.length) {
+          // No pages assigned; go to thank you.
+          window.location.href = "thankyou.html";
+          return;
+        }
+
+        // Find the last answered question (highest index with answered=1)
+        let lastAnsweredIndex = -1;
+        for (let i = 0; i < PAGES.length; i++) {
+          const key = `answered:${USER}:${PAGES[i].qref}`;
+          if (localStorage.getItem(key) === '1') lastAnsweredIndex = i;
+        }
+
+        if (lastAnsweredIndex === -1) {
+          // None answered → go to first question
+          window.location.href = PAGES[0].url;
+          return;
+        }
+
+        // Prefer next unanswered if available; otherwise last answered
+        const next = (lastAnsweredIndex + 1 < PAGES.length) ? lastAnsweredIndex + 1 : lastAnsweredIndex;
+        window.location.href = PAGES[next].url;
+      }
+
+      document.getElementById('go-next').addEventListener('click', go);
+    })();
+  </script>
+</body>
+</html>

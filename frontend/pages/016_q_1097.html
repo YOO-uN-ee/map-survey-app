@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>q_1097</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g-purple: #673ab7;
+    --g-purple-dark: #5e35b1;
+    --g-bg: #f6f6f6;
+    --g-text: #202124;
+    --g-muted: #5f6368;
+    --g-card: #ffffff;
+    --g-border: #dadce0;
+  }
+  html, body { margin: 0; background: var(--g-bg); color: var(--g-text); font-family: Roboto, Arial, sans-serif; }
+  .g-container { max-width: 880px; margin: 24px auto 64px auto; padding: 0 16px; }
+  .g-card { background: var(--g-card); border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.24); border: 1px solid var(--g-border); margin-bottom: 16px; }
+  .g-card-header { padding: 24px 24px 12px 24px; border-bottom: 1px solid var(--g-border); }
+  .g-title { font-size: 28px; font-weight: 500; margin: 0 0 4px 0; }
+  .g-subtitle { color: var(--g-muted); font-size: 14px; margin: 0; }
+  .g-section { padding: 20px 24px 24px 24px; }
+  .g-q-title { font-size: 18px; font-weight: 500; margin: 0 0 12px 0; }
+  .g-required::after { content: " *"; color: #d93025; font-weight: 700; }
+  .g-help { color: var(--g-muted); font-size: 12px; margin-top: 6px; }
+  .g-img-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0 8px 0; }
+  .g-img-grid img { width: 100%; height: auto; border: 1px solid var(--g-border); border-radius: 6px; background: #fff; cursor: zoom-in; }
+  textarea { width: 100%; min-height: 96px; resize: vertical; padding: 10px 12px; border: 1px solid var(--g-border); border-radius: 6px; font-family: Roboto, Arial, sans-serif; font-size: 14px; box-sizing: border-box; }
+  .g-radio-group { margin-top: 6px; }
+  .g-radio { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 14px; }
+  .g-actions { display: flex; justify-content: flex-start; gap: 12px; padding: 16px 24px 24px 24px; }
+  .g-btn { background: var(--g-purple); color: #fff; border: none; border-radius: 24px; padding: 10px 20px; font-weight: 500; cursor: pointer; }
+  .g-btn[disabled] { opacity: .6; cursor: not-allowed; }
+  .g-btn:hover { background: var(--g-purple-dark); }
+  details.g-instructions summary { font-weight: 500; cursor: pointer; list-style: none; }
+  details.g-instructions summary::-webkit-details-marker { display:none; }
+  details.g-instructions summary:after { content: "▾"; float: right; color: var(--g-muted); }
+  details.g-instructions[open] summary:after { content: "▴"; }
+  .g-muted-note { color: var(--g-muted); font-size: 12px; margin-left: 4px; }
+  /* Image lightbox */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: none; align-items: center; justify-content: center; z-index: 9999; }
+  .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.5); }
+  .lightbox.visible { display: flex; }
+  .lightbox:after { content: "×"; position: fixed; top: 16px; right: 24px; font-size: 28px; color: #fff; cursor: pointer; }
+</style>
+
+</head>
+<body>
+  <div class="g-container">
+    <div class="g-card">
+      <div class="g-card-header">
+        <h1 class="g-title">Map Question</h1>
+        <p class="g-subtitle">Map Survey <span class="g-muted-note">(Fields marked * are required)</span></p>
+      </div>
+      <div class="g-section">
+        
+<details class="g-instructions" open>
+  <summary>Instructions</summary>
+  <div style="margin-top:12px;">
+    <p><strong>General</strong></p>
+    <ul>
+      <li>If question can be answered, write answer in short answer box</li>
+      <li>If answer is a text from the map, copy it as it appears</li>
+    </ul>
+    <p><strong>Numerical Answers</strong></p>
+    <ul>
+      <li>Include units as indicated on the map <em>(Don’t convert 1200m to 1.2km)</em></li>
+      <li>If both map frame and ruler scale is available, <u>use the ruler scale</u></li>
+      <li>If question asks for an area, use &#123;unit&#125;&#178;</li>
+      <li>Use numerical values <em>(e.g., 4 instead of four)</em></li>
+    </ul>
+    <p><strong>Directional Answers</strong></p>
+    <ul>
+      <li>Use 8 cardinal directions only: North, North East, East, South East, South, South West, West, North West</li>
+      <li>Write 'North' or 'South' before 'East' or 'West'</li>
+      <li><strong>Notice that the north arrow compass do not always point upward</strong></li>
+    </ul>
+    <p><strong>Multi-Part Answers</strong></p>
+    <ul>
+      <li>Separate with semicolon (;) <em>(e.g., Zone A; Zone B)</em></li>
+    </ul>
+  </div>
+</details>
+
+      </div>
+    </div>
+
+
+    <div class="g-card">
+      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-016-q_1097">
+        <input type="hidden" name="user" value="016">
+        <input type="hidden" name="question_ref" value="q_1097">
+        <input type="hidden" name="question_text" value="The mines &#x27;Mine No. 4 - ALES-055797&#x27; and &#x27;Blue Creek Mine No. 1 - ALES-056519&#x27; are divided into multiple smaller blocks. What is the orientation of the southernmost block(s) of Blue Creek Mine No. 1 relative to the northernmost block(s) of Mine No. 4?">
+        <input type="hidden" name="map_count" value="Single">
+        <input type="hidden" name="spatial_relationship" value="Orientation">
+        <input type="hidden" name="next_url" value="https://map-survey-app.onrender.com/016_q_1102.html">
+        <div class="g-section">
+          <div class="g-q-title">The mines &#x27;Mine No. 4 - ALES-055797&#x27; and &#x27;Blue Creek Mine No. 1 - ALES-056519&#x27; are divided into multiple smaller blocks. What is the orientation of the southernmost block(s) of Blue Creek Mine No. 1 relative to the northernmost block(s) of Mine No. 4?</div>
+          <div class="g-img-grid">
+
+            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/EIS/Appendix D - Biological Assessment/image10_1.png" alt="Map image">
+
+          </div>
+          <label class="g-q-title">Answer <span class="g-muted-note">(optional)</span></label>
+          <textarea name="answer" placeholder="Type your short answer here..."></textarea>
+
+          <div style="margin-top:16px;">
+            <label class="g-q-title g-required">Validation</label>
+            <div class="g-radio-group">
+
+              <label class="g-radio"><input type="radio" name="validity" value="Can be answered" required> Can be answered</label>
+              <label class="g-radio"><input type="radio" name="validity" value="Map doesn&#x27;t contain information to answer the question" required> Map doesn&#x27;t contain information to answer the question</label>
+            </div>
+
+            <div id="noinfo-wrap-016-q_1097" style="display:none; margin-top:12px;">
+              <label class="g-q-title">Please briefly explain what information was missing (required when selecting this option):</label>
+              <textarea id="noinfo-text-016-q_1097" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature."></textarea>
+              <div class="g-help">This field is required only when selecting “Map doesn't contain information to answer the question”.</div>
+            </div>
+
+
+          <div class="g-actions">
+            <button class="g-btn" type="submit">Submit & Next</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <script>
+  (function() {
+    const USER = "016";
+    const QREF = "q_1097";
+    const NEXT = "https://map-survey-app.onrender.com/016_q_1102.html";
+    const answeredKey = `answered:${USER}:${QREF}`;
+    const progressKey = `progress:${USER}`;
+
+    function disableForm(){
+      const form = document.getElementById('form-016-q_1097');
+      if (!form) return;
+      form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+      const btn = form.querySelector('button.g-btn');
+      if (btn) btn.textContent = 'Submitted';
+    }
+
+    // ------- Image Lightbox -------
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML = '<img id="lb-img" alt="Zoomed image">';
+    document.body.appendChild(lb);
+    lb.addEventListener('click', () => lb.classList.remove('visible'));
+    document.querySelectorAll('.g-img-grid img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('lb-img').src = img.src;
+        lb.classList.add('visible');
+      });
+    });
+
+    // Handle ok=1 first, then strip the param from the URL
+
+    (function stripOkParam(){
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('ok')) {
+        url.searchParams.delete('ok');
+        window.history.replaceState({}, '', url.toString());
+      }
+    })();
+
+    // If saved progress points to a different page, navigate there
+    const savedProgress = localStorage.getItem(progressKey);
+    if (savedProgress && savedProgress !== '' && savedProgress !== 'DONE') {
+      const savedPath = savedProgress.split('#')[0];
+      const thisPath = window.location.href.split('#')[0];
+      if (savedPath !== thisPath) { window.location.replace(savedProgress); return; }
+    }
+
+    const form = document.getElementById('form-016-q_1097');
+    if (!form) return;
+
+    // --- Toggle the reason box when "Map doesn't contain information..." is selected ---
+    const NOINFO_VALUE = "Map doesn't contain information to answer the question";
+    const reasonWrap = document.getElementById("noinfo-wrap-016-q_1097");
+    const reasonText = document.getElementById("noinfo-text-016-q_1097");
+
+    function updateReasonVisibility() {
+      const chosen = form.querySelector('input[name="validity"]:checked');
+      const show = !!chosen && chosen.value === NOINFO_VALUE;
+      if (reasonWrap) reasonWrap.style.display = show ? 'block' : 'none';
+      if (reasonText) reasonText.required = !!show;
+    }
+
+    // initialize + bind
+    Array.from(form.querySelectorAll('input[name="validity"]')).forEach(r => {
+      r.addEventListener('change', updateReasonVisibility);
+    });
+    updateReasonVisibility();
+
+    // Prevent double-submit on the client,
+    // but DO NOT disable inputs before the browser serializes the form.
+    let submitted = false;
+    form.addEventListener('submit', function(e) {
+      if (submitted) { e.preventDefault(); return; }
+
+      // Enforce reason when the "no info" option is selected
+      const chosen = form.querySelector('input[name="validity"]:checked');
+      const needsReason = !!chosen && chosen.value === NOINFO_VALUE;
+      if (needsReason) {
+        const val = (reasonText && reasonText.value || "").trim();
+        if (!val) {
+          e.preventDefault();
+          alert("Please provide a brief reason for why the map does not contain the required information.");
+          if (reasonText) reasonText.focus();
+          return;
+        }
+      }
+
+      submitted = true;
+
+      // Record progress now
+      try {
+        localStorage.setItem(answeredKey, '1');
+        localStorage.setItem(progressKey, NEXT ? NEXT : 'DONE');
+      } catch (err) {}
+
+      // Disable only the submit button immediately (buttons don't affect payload)
+      const btn = form.querySelector('button.g-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+      }
+
+      // Then lock the rest (purely UX)
+      setTimeout(() => {
+        form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+      }, 100);
+    }, { once: true });
+  })();
+</script>
+  </div>
+</body>
+</html>
