@@ -641,7 +641,7 @@
         "spatial_relationship": "Equal"
     },
     {
-        "question_text": "In Cape Town, near ELSIESKRAAL RIVER VALLEY, what is the orientation of the Doordekraal Dam Integrated into Continuous Green System relative to the northwest corner of The Vision of Southern Sector?",
+        "question_text": "In Cape Town, near ELSIESKRAAL RIVER VALLEY, what is the orientation of the Doordekraal Dam Integrated into Continuous Green System relative to the northwest corner of the 'Southern Sector'?",
         "expected_answer": "North East",
         "image_urls": [
             "capetown/Elsieskraal River Valley Development Framework, 1998/image76_1.png",
