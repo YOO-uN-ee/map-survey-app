@@ -251,7 +251,7 @@
         "spatial_relationship": "Intersect"
     },
     {
-        "question_text": "In what orientation is Minute Man National Historical Park relative to the 7.5-minute quadrangle of Natick?",
+        "question_text": "What is the orientation of Minute Man National Historical Park relative to the 7.5-minute quadrangle of Natick?",
         "expected_answer": "North",
         "image_urls": [
             "national-parks/639106/image1_m2.png",
