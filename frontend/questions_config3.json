@@ -811,7 +811,7 @@
         "spatial_relationship": "Orientation"
     },
     {
-        "question_text": "The CRFREE Project Area/Vicinity and Parcels are classified into one of six types. What type of Project Area/Vicinity and Parcels is the Project Component of the 'State Parks Barn Complex'?",
+        "question_text": "The CRFREE Project Area/Vicinity and Parcels are classified into one of six types. What type of Project Area/Vicinity and Parcels is the 'State Parks Barn Complex'?",
         "expected_answer": "California State Parks",
         "image_urls": [
             "FEMA/fema_r9_draft-environmental-assessment-for-carmel-river-floodplain-restoration-and-environmental-enhancement-project-hmgp-dr-4344-539-097-ca_042025/image95_1.png",
