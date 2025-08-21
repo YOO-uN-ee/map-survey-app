@@ -911,7 +911,7 @@
         "spatial_relationship": "Orientation"
     },
     {
-        "question_text": "Which segments of Level of Service Screenline intersect the Airport Boundary area in Seattle, WA?",
+        "question_text": "Each Level of Service Screenline segment is associated with a unique code in the format {NUMBER}.{NUMBER}. Which segments intersect with the Airport Boundary area in Seattle, WA?",
         "expected_answer": "3.12; 4.13",
         "image_urls": [
             "seattle-planning/CouncilAdopted2020/image459_1.png",
