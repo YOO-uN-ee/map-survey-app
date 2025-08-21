@@ -461,7 +461,7 @@
         "spatial_relationship": "Equal"
     },
     {
-        "question_text": "In Cape Town, near ELSIESKRAAL RIVER VALLEY, what are the Parking Management & Public Transport Plan areas that border the Landscaped Sport Recreation Area?",
+        "question_text": "In the Elsieskraal River Valley of Cape Town, all Parking Management & Public Transport Plan areas are associated with either a 'Proposed Bays' number or a name ending with 'bays'. Identify the region in which the 'Landscaped Sport/Recreation Area' is located. What are the names of the areas that border this region?",
         "expected_answer": "3979; 150 bays; 4431",
         "image_urls": [
             "capetown/Elsieskraal River Valley Development Framework, 1998/image96_1.png",
