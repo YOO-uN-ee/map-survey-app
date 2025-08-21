@@ -391,7 +391,7 @@
         "spatial_relationship": "Within"
     },
     {
-        "question_text": "Which Original Area of Reservation borders the Indian Reservation area where Badlands National Park is located?",
+        "question_text": "Identify the 'Indian Reservation' area in which 'Badlands National Park' is located. Which 'Original Areas of Reservation' border the identified area?",
         "expected_answer": "ROSEBUD INDIAN RESERVATION",
         "image_urls": [
             "national-parks/689284/image1_m1.png",
