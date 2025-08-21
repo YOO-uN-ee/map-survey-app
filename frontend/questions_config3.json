@@ -324,8 +324,8 @@
         "question_text": "In the Aurora Ave and 97th Residential Urban Village of Seattle, which Safety Audit Team's route is intersected by N. 100 Ave? Answer with the team number.",
         "expected_answer": "1",
         "image_urls": [
-            "seattle-planning/Aurora-Liction-Plan/image69_1.png",
-            "seattle-planning/Aurora-Liction-Plan/image70_1.png"
+            "seattle-planning/Aurora-Liction-plan/image69_1.png",
+            "seattle-planning/Aurora-Liction-plan/image70_1.png"
         ],
         "map_count": "Multi",
         "spatial_relationship": "Intersect"
@@ -744,8 +744,8 @@
         "question_text": "In the Aurora Ave and 97th Residential Urban Village of Seattle, which Safety Audit Team's route is intersected by N. 105 Ave? Answer with the team number.",
         "expected_answer": "3",
         "image_urls": [
-            "seattle-planning/Aurora-Liction-Plan/image71_1.png",
-            "seattle-planning/Aurora-Liction-Plan/image72_1.png"
+            "seattle-planning/Aurora-Liction-plan/image71_1.png",
+            "seattle-planning/Aurora-Liction-plan/image72_1.png"
         ],
         "map_count": "Multi",
         "spatial_relationship": "Intersect"
