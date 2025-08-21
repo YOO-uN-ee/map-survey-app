@@ -581,7 +581,7 @@
         "spatial_relationship": "Equal"
     },
     {
-        "question_text": "What types of routes intersect the 'Address Spatial Economic Imbalances through Area Based Interventions' area in northwestern Cape Town?",
+        "question_text": "What are the routes and lines that intersect the 'Address Spatial Economic Imbalances through Area Based Interventions' area in northwestern Cape Town?",
         "expected_answer": "Proposed Railway Line; Prioritised Railway Line; IRT Trunk Route (Phase 1A); Connector Route",
         "image_urls": [
             "capetown/Annexure B - Cape Town Spatial Development Framework/image48_1.png",

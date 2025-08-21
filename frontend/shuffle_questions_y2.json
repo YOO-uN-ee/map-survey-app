@@ -551,7 +551,7 @@
         "spatial_relationship": "Orientation"
     },
     {
-        "question_text": "In Texas, what type of soil area contains the largest area of coal (surface)?",
+        "question_text": "In Texas, what type of soil area contains the largest area of coal (surface)? Answer with the associated alphabet.",
         "expected_answer": "Reddish-brown to grayish-brown, neutral to slightly acid sandy loams and clay loams; some stony soils",
         "image_urls": [
             "national-parks/707314/image1_m27.png",
