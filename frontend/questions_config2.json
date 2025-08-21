@@ -66,8 +66,8 @@
         "spatial_relationship": "Orientation"
     },
     {
-        "question_text": "Sri Lanka is divided into multiple districts (e.g., Ampara). Identify the district that contains the highest number of 'Landslides occurred within May, 2003'. What is the dominant 'Elevation-FEET' range of that district? Answer with the maximum elevation range value.",
-        "expected_answer": "2000",
+        "question_text": "Sri Lanka is divided into multiple districts (e.g., Ampara). Identify the district that contains the highest number of 'Landslides occurred within May, 2003'. What is the dominant 'Elevation-FEET' range of that district?",
+        "expected_answer": "0-2000",
         "image_urls": [
             "aiib/environmental-and-social-management-framework-English/image13_1.png",
             "aiib/environmental-and-social-management-framework-English/image8_m0.png"
@@ -161,7 +161,7 @@
         "spatial_relationship": "Border"
     },
     {
-        "question_text": "In the New Construction Plan, each building is labeled with a number, and multiple buildings may share the same number. How many buildings are within the 'Story Hotel Under Construction' area in Phase 2/3 Construction?",
+        "question_text": "In the New Construction Plan, each building is labeled with a number. Even if multiple buildings share the same number, each are considered as different buildings. How many buildings are within the 'Story Hotel Under Construction' area in Phase 2/3 Construction?",
         "expected_answer": "12",
         "image_urls": [
             "seychelles/ESIA-Report-FC-and-SS-Redevelopment-_-Vol-1_FINAL-1/image47_1.png",
