@@ -271,7 +271,7 @@
         "spatial_relationship": "Distance"
     },
     {
-        "question_text": "In Cape Town, what orientation is Cape Town International Airport in relative to the Philippi Horticultural Area?",
+        "question_text": "In Cape Town, what is the orientation of Cape Town International Airport in relation to the Philippi Horticultural Area?",
         "expected_answer": "North East",
         "image_urls": [
             "capetown/Annexure B - Cape Town Spatial Development Framework/image68_1.png",
