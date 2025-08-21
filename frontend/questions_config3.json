@@ -851,7 +851,7 @@
         "spatial_relationship": "Within"
     },
     {
-        "question_text": "In Ireland, which aquaculture area location is situated in the county where the Knockharley landfill is located?",
+        "question_text": "In Ireland, what is the name of the aquaculture area situated in the county where the Knockharley landfill is located?",
         "expected_answer": "Mornington",
         "image_urls": [
             "ireland/State-of-the-environment-in-Ireland-2004-reduced/image192_1.png",
