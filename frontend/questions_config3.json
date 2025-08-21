@@ -891,7 +891,7 @@
         "spatial_relationship": "Equal"
     },
     {
-        "question_text": "What type of Aquifer Productivity does the southwest side of BLAAUWBERG CONSERVATION AREA in Cape Town belong to?",
+        "question_text": "What level of 'Aquifers Productivity' does the southwest side of BLAAUWBERG CONSERVATION AREA in Cape Town belong to?",
         "expected_answer": "Moderate",
         "image_urls": [
             "capetown/Annexure B - Cape Town Spatial Development Framework/image65_1.png",
