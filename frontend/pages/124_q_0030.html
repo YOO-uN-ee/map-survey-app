@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>q_0202</title>
+  <title>q_0030</title>
   
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -89,19 +89,19 @@
 
 
     <div class="g-card">
-      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-122-q_0202">
-        <input type="hidden" name="user" value="122">
-        <input type="hidden" name="question_ref" value="q_0202">
-        <input type="hidden" name="question_text" value="Within Area 6 of North Shore Levee West, how many ‘Closure Structures’ are located in the ‘Vegetation Conversion Area’?">
+      <form action="https://mysite-mrzq.onrender.com/api/submit/" method="post" id="form-124-q_0030">
+        <input type="hidden" name="user" value="124">
+        <input type="hidden" name="question_ref" value="q_0030">
+        <input type="hidden" name="question_text" value="Identify the &#x27;Seattle Public Libraries&#x27; point located closest to the eastern boundary of the &#x27;SoDO Stadium&#x27; Industrials Lands Subarea. In which &#x27;Police Beat&#x27; is it located.">
         <input type="hidden" name="map_count" value="Multi">
-        <input type="hidden" name="spatial_relationship" value="Within">
-        <input type="hidden" name="next_url" value="https://map-survey-app.onrender.com/122_q_1000.html">
+        <input type="hidden" name="spatial_relationship" value="Distance">
+        <input type="hidden" name="next_url" value="https://map-survey-app.onrender.com/124_q_0031.html">
         <div class="g-section">
-          <div class="g-q-title">Within Area 6 of North Shore Levee West, how many ‘Closure Structures’ are located in the ‘Vegetation Conversion Area’?</div>
+          <div class="g-q-title">Identify the &#x27;Seattle Public Libraries&#x27; point located closest to the eastern boundary of the &#x27;SoDO Stadium&#x27; Industrials Lands Subarea. In which &#x27;Police Beat&#x27; is it located.</div>
           <div class="g-img-grid">
 
-            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/FEMA/BRIC-EMS-2020-BR-102-0002_WA-NorthShoreLeveeWest-DEA-20241126/image142_1.png" alt="Map image">
-            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/FEMA/BRIC-EMS-2020-BR-102-0002_WA-NorthShoreLeveeWest-DEA-20241126/image157_1.png" alt="Map image">
+            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/seattle-planning/IndustrialMaritimeStrategyFinalEIS/image751_1.png" alt="Map image">
+            <img src="https://media.githubusercontent.com/media/knowledge-computing/carto-reasoning/img-upload/img-raw/seattle-planning/IndustrialMaritimeStrategyFinalEIS/image760_1.png" alt="Map image">
 
           </div>
           <label class="g-q-title">Answer <span class="g-muted-note">(optional)</span></label>
@@ -115,9 +115,9 @@
               <label class="g-radio"><input type="radio" name="validity" value="Map doesn&#x27;t contain information to answer the question" required> Map doesn&#x27;t contain information to answer the question</label>
             </div>
 
-            <div id="noinfo-wrap-122-q_0202" style="display:none; margin-top:12px;">
+            <div id="noinfo-wrap-124-q_0030" style="display:none; margin-top:12px;">
               <label class="g-q-title">Please briefly explain what information was missing (required when selecting this option):</label>
-              <textarea id="noinfo-text-122-q_0202" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature."></textarea>
+              <textarea id="noinfo-text-124-q_0030" name="noinfo_reason" placeholder="e.g., The map shows roads only; no distances or names to identify the feature."></textarea>
               <div class="g-help">This field is required only when selecting “Map doesn't contain information to answer the question”.</div>
             </div>
 
@@ -141,14 +141,14 @@
 
     <script>
   (function() {
-    const USER = "122";
-    const QREF = "q_0202";
-    const NEXT = "https://map-survey-app.onrender.com/122_1_1000.html";
+    const USER = "124";
+    const QREF = "q_0030";
+    const NEXT = "https://map-survey-app.onrender.com/124_q_0031.html";
     const answeredKey = `answered:${USER}:${QREF}`;
     const progressKey = `progress:${USER}`;
 
     function disableForm(){
-      const form = document.getElementById('form-122-q_0202');
+      const form = document.getElementById('form-124-q_0030');
       if (!form) return;
       form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
       const btn = form.querySelector('button.g-btn');
@@ -186,13 +186,13 @@
       if (savedPath !== thisPath) { window.location.replace(savedProgress); return; }
     }
 
-    const form = document.getElementById('form-122-q_0202');
+    const form = document.getElementById('form-124-q_0030');
     if (!form) return;
 
     // --- Toggle the reason box when "Map doesn't contain information..." is selected ---
     const NOINFO_VALUE = "Map doesn't contain information to answer the question";
-    const reasonWrap = document.getElementById("noinfo-wrap-122-q_0202");
-    const reasonText = document.getElementById("noinfo-text-122-q_0202");
+    const reasonWrap = document.getElementById("noinfo-wrap-124-q_0030");
+    const reasonText = document.getElementById("noinfo-text-124-q_0030");
 
     function updateReasonVisibility() {
       const chosen = form.querySelector('input[name="validity"]:checked');
