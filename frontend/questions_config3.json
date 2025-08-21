@@ -421,7 +421,7 @@
         "spatial_relationship": "Within"
     },
     {
-        "question_text": "In Cape Town, on which street do Area 2 and Area 3 border each other near District Six LSDF?",
+        "question_text": "In the District Six LSDF of Cape Town, which street forms the boundary between Area 2 and Area 3?",
         "expected_answer": "CONSTITUTION STREET",
         "image_urls": [
             "capetown/District_Six_LSDF/image108_1.png",
