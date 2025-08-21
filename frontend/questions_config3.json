@@ -771,7 +771,7 @@
         "spatial_relationship": "Border"
     },
     {
-        "question_text": "In Cape Town, near ELSIESKRAAL RIVER VALLEY, what is the name of the river that intersects the Golf Course area?",
+        "question_text": "In Cape Town, near ELSIESKRAAL RIVER VALLEY, what is the name of the 'Stormwater System' that intersects the 'Golf Course' area?",
         "expected_answer": "Golf Course River",
         "image_urls": [
             "capetown/Elsieskraal River Valley Development Framework, 1998/image45_1.png",
