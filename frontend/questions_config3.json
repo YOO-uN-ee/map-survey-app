@@ -901,7 +901,7 @@
         "spatial_relationship": "Equal"
     },
     {
-        "question_text": "In Cape Town, near ELSIESKRAAL RIVER VALLEY, what is the orientation of the Rationalise Interaction in North Entrance Precinct relative to the westernmost point of MONEX WATERFRONT?",
+        "question_text": "In Cape Town, near ELSIESKRAAL RIVER VALLEY, what is the orientation of the 'Rationalise Intersection' in North Entrance Precinct relative to the westernmost point of MONEX WATERFRONT?",
         "expected_answer": "North East",
         "image_urls": [
             "capetown/Elsieskraal River Valley Development Framework, 1998/image105_1.png",
