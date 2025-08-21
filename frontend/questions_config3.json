@@ -221,7 +221,7 @@
         "spatial_relationship": "Equal"
     },
     {
-        "question_text": "What are the Rocks areas covered by the Published geologic maps by O'Sullivan and Beikman near La Vida Mission quadrangle?",
+        "question_text": "Within the La Vida Mission Quadrangle, identify the area where the 'O'Sullivan and Beikman' region overlaps with the 'O'Sullivan and Beaumont' region. What are the types of rocks (labeled with the suffix ROCKS) in these regions?",
         "expected_answer": "OLDER MESOZOIC ROCKS; YOUNGER CRETACEOUS AND TERTIARY ROCKS",
         "image_urls": [
             "national-parks/732920/image1_m122.png",
