@@ -7,11 +7,11 @@ from html import escape
 # =========================
 # Paths & Config
 # =========================
-QUESTION_FILE = "questions_config2.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
+QUESTION_FILE = "questions_config.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
 USER_FILE = "users.csv"                   # CSV with headers: user_id,user_name
 OUTPUT_DIR = "pages"                      # Generated HTML output
 ASSIGNMENTS_FILE = "assignments.json"     # Optional: mapping question_ref -> [user_id, user_id, user_id]
-STARTING_IDX = 70
+STARTING_IDX = 1
 
 # Where the static HTML pages are served (use a local HTTP server)
 #   cd pages && python -m http.server 8001
