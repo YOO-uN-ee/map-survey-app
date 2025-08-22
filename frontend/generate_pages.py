@@ -7,11 +7,11 @@ from html import escape
 # =========================
 # Paths & Config
 # =========================
-QUESTION_FILE = "questions_config3.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
+QUESTION_FILE = "questions_config2.json"   # Each item: {question_text, image_urls[], map_count, spatial_relationship}
 USER_FILE = "users.csv"                   # CSV with headers: user_id,user_name
 OUTPUT_DIR = "pages"                      # Generated HTML output
 ASSIGNMENTS_FILE = "assignments.json"     # Optional: mapping question_ref -> [user_id, user_id, user_id]
-STARTING_IDX = 1000
+STARTING_IDX = 70
 
 # Where the static HTML pages are served (use a local HTTP server)
 #   cd pages && python -m http.server 8001
@@ -302,6 +302,8 @@ for i, q in enumerate(questions):
 
         try:
             idx = pages_for_user.index(this_filename)
+            display_num = idx + 1
+            total_num = len(pages_for_user)
         except ValueError:
             raise RuntimeError(
                 f"Filename mismatch: {this_filename} not found in pages_for_user for user {user_id}. "
@@ -350,7 +352,7 @@ for i, q in enumerate(questions):
         <input type="hidden" name="spatial_relationship" value="{spatial_attr}">
         <input type="hidden" name="next_url" value="{next_url_attr}">
         <div class="g-section">
-          <div class="g-q-title">{escape(qtext)}</div>
+          <div class="g-q-title">Q{display_num}/{total_num}: {escape(qtext)}</div>
           <div class="g-img-grid">
 ''']
 
