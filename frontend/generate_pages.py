@@ -362,7 +362,7 @@ for i, q in enumerate(questions):
 
         form_block.append('''
           </div>
-          <label class="g-q-title">Answer <span class="g-muted-note">(optional)</span></label>
+          <label class="g-q-title">Answer</label>
           <textarea name="answer" placeholder="Type your short answer here..."></textarea>
 
           <div style="margin-top:16px;">
