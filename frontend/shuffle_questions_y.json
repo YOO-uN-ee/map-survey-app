@@ -272,7 +272,8 @@
         "question_text": "In the Lumberton Loop Project Area, what is the orientation of the 'Crosswalk Stripping' in relation to the 'Walnut Street Component'?",
         "expected_answer": "West",
         "image_urls": [
-            "FEMA/BRIC-EMA-2020-BR-100-0009-NC-LumbertonLoop-DEA-2024614/image"
+            "FEMA/BRIC-EMA-2020-BR-100-0009-NC-LumbertonLoop-DEA-2024614/image/image18_1.png",
+            "FEMA/BRIC-EMA-2020-BR-100-0009-NC-LumbertonLoop-DEA-2024614/image/image19_1.png"
         ],
         "map_count": "Multi",
         "spatial_relationship": "Orientation"
